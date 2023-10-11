@@ -23,14 +23,14 @@ import * as SecureStore from "expo-secure-store";
 
 WebBrowser.maybeCompleteAuthSession();
 const GoogleBtn = () => {
-  const { signIn } = useAuth();
+  const { signIn } = useAuth();d
   const [loading, setLoading] = React.useState(false);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
-      "833484929166-jvq72j71t6f1929o6nkrmdt9u3lqofhr.apps.googleusercontent.com",
+      "484802558640-166g0g6kkhnj82jkc3ruf2chd6vaifuc.apps.googleusercontent.com",
     iosClientId:
-      "833484929166-09cj7vevhnkcr5dfr7fe6pah2a0evvum.apps.googleusercontent.com",
+      "484802558640-vc33auh9p27s69o51m2v2l1jsidji6ia.apps.googleusercontent.com",
   });
 
   useEffect(() => {

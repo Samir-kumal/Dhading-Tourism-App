@@ -1,6 +1,6 @@
 module.exports = {
-  name: "Visit Jwalamukhi",
-  slug: "visit-jwalamukhi",
+  name: "Visit Dhadhing",
+  slug: "visit-Dhadhing",
   version: "7.0.0",
   orientation: "portrait",
   scheme: "wine-dwine",
@@ -17,7 +17,7 @@ module.exports = {
     entitlements: {
       "com.apple.developer.networking.wifi-info": true,
     },
-    bundleIdentifier: "com.castelltech.jwalamukhi",
+    bundleIdentifier: "com.bms.dhadhingapp",
     buildNumber: "1.0.0",
     config: {
       googleMapsApiKey: "AIzaSyA_iLTcL1vBCETujAlAbo1WB1gbsqtDGSw",
@@ -36,7 +36,7 @@ module.exports = {
       foregroundImage: "./assets/Images/adaptiveicon.png",
       backgroundColor: "#ffffff",
     },
-    package: "com.castelltech.jwalamukhi",
+    package: "com.bms.dhadhingapp",
     versionCode: 7,
     config: {
       googleMaps: {
@@ -54,7 +54,7 @@ module.exports = {
       "expo-location",
       {
         locationAlwaysAndWhenInUsePermission:
-          "Allow Panauti-app to use your location.",
+          "Allow Dhadhing-app to use your location.",
       },
     ],
     ["@react-native-google-signin/google-signin"],
@@ -62,7 +62,7 @@ module.exports = {
   extra: {
     WEATHER_API_KEY: "f873e2396c79be34489bd8d70b7e5f32",
     "eas": {
-        "projectId": "cceb7cd0-30ec-46a8-bdfd-4ada1e78ab0f"
+        "projectId": "81b0f18e-87f4-4c85-961d-48629fc7ea87"
       }
   },
   owner: "samir_kumal",

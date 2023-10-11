@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.castelltech.jwalamukhi'
+    namespace 'com.bms.dhadhingapp'
     defaultConfig {
-        applicationId 'com.castelltech.jwalamukhi'
+        applicationId 'com.bms.dhadhingapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 7

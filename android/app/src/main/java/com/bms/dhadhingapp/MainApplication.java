@@ -1,4 +1,4 @@
-package com.castelltech.jwalamukhi;
+package com.bms.dhadhingapp;
 
 import android.app.Application;
 import android.content.res.Configuration;
