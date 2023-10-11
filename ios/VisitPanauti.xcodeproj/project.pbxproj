@@ -320,8 +320,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nexsewa.winedwine";
-				PRODUCT_NAME = "VisitPanauti";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bms.dhadhingapp";
+				PRODUCT_NAME = "VisitDhadhing";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -346,8 +346,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nexsewa.winedwine";
-				PRODUCT_NAME = "VisitPanauti";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bms.dhadhingapp";
+				PRODUCT_NAME = "VisitDhadhing";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";

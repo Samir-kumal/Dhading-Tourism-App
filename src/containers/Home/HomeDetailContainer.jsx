@@ -47,8 +47,8 @@ const HomeDetailContainer = () => {
         </View> */}
         <ContentLayoutCustomized
              data={datas}
-             title={t("homepage.firstpage.sites.sites_cards.religious")}
-             category={t("homepage.firstpage.sites.sites_category.religious")}
+             title={t("homepage.firstpage.sites.sites_cards.natural")}
+             category={t("homepage.firstpage.sites.sites_category.natural")}
              linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
         />
         <SeeMoreButton onPress={() => handlePress(categories[1])}>
@@ -67,8 +67,8 @@ const HomeDetailContainer = () => {
         </View> */}
         <ContentLayoutCustomized
              data={datas}
-             title={t("homepage.firstpage.sites.sites_cards.religious")}
-             category={t("homepage.firstpage.sites.sites_category.religious")}
+             title={t("homepage.firstpage.sites.sites_cards.historical")}
+             category={t("homepage.firstpage.sites.sites_category.historical")}
              linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
         />
         <SeeMoreButton onPress={() => handlePress(categories[2])}>

@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 import Loading from "../status/Loading";
 import { images } from "../../constants";
 import { PlaceCardPanauti, PlaceCard } from "../common";
+import { MaterialCommunityIcons, Foundation,MaterialIcons,FontAwesome5 } from "@expo/vector-icons";
 
 const defaultMarkers = [
   {
@@ -183,19 +184,51 @@ const Maps = ({ data }) => {
                 onPress={() => handleMarkerPress(marker)}
                 tracksViewChanges={false}
               >
-                <Image
+                {marker.category.toLowerCase() === "religious" && (
+                  <MaterialCommunityIcons
+                    name="home-minus"
+                    size={24}
+                    color="black"
+                  />
+                )}
+                {marker.category.toLowerCase() ===
+                  "fooding and accomodation" && (
+                  <MaterialCommunityIcons
+                    name="food-fork-drink"
+                    size={24}
+                    color="black"
+                  />
+                )}
+                {marker.category.toLowerCase() === "natural" && (
+                  <Foundation name="trees" size={34} color="green" />
+                )}
+                 {marker.category.toLowerCase() === "official" && (
+                 <MaterialCommunityIcons name="office-building-marker" size={24} color="blue" />
+                )}
+                    {marker.category.toLowerCase() === "agriculture" && (
+                 <MaterialIcons name="agriculture" size={24} color="black" />
+                )}
+                      {marker.category.toLowerCase() === "tourism" && (
+                <FontAwesome5 name="hotel" size={24} color="pink" />
+                )}
+                      {marker.category.toLowerCase() === "historical" && (
+                <MaterialIcons name="museum" size={24} color="grey" />
+                )}
+                {/* <Image
                   source={images.marker}
                   style={{ height: 30, width: 30 }}
-                />
+                /> */}
               </Marker>
             ))}
         </MapView>
       )}
       {showContainer && (
-        <PlaceCard
-          class="  left-0 right-0  absolute bottom-8  "
+        <View className = "absolute top-20 left-0 right-0">
+          <PlaceCard
+         
           item={selectedData}
         />
+        </View>
       )}
     </>
   );

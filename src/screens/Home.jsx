@@ -13,11 +13,18 @@ import Weather from "../containers/weather";
 import { StatusBar } from "expo-status-bar";
 import { useDataProvider } from "../context/DataProvider";
 import { InternetContext } from "../context/Internet";
-import { Emergency, MainContainer, ContentLayout } from "../components/common";
+import {
+  Emergency,
+  MainContainer,
+  ContentLayout,
+  PlaceCard,
+} from "../components/common";
 import { Menu, Header, Sheet } from "./nav";
 import { useTranslation } from "react-i18next";
 import { MaterialIcons } from "@expo/vector-icons";
+import { usePathname } from "expo-router";
 import HomeGridComponent from "../components/Home/HomeComponent";
+import { use } from "i18next";
 const Home = React.memo(() => {
   const colorScheme = useColorScheme();
   const [show, setShow] = React.useState(false);
@@ -26,9 +33,24 @@ const Home = React.memo(() => {
   const internet = useContext(InternetContext);
   const [isConnected, setIsConnected] = useState(true);
   const { t } = useTranslation();
+  const [isFocused, setIsFocused] = useState(false);
+  const [filteredData, setFilteredData] = useState(datas);
+  const [inputData, setInputData] = useState("");
+  const pathname = usePathname();
 
+  const handleFilter = (text) => {
+    const filteredItems = datas.filter((item) =>
+      item.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
+  useEffect(()=>{
+    setIsFocused(false)
+    setInputData("")
+  },[pathname])
 
   useEffect(() => {
+
     setTimeout(() => {
       setIsConnected(internet.status);
     }, 1000);
@@ -51,7 +73,7 @@ const Home = React.memo(() => {
   // Update the component's state whenever the 'datas' in the context changes
 
   const MemoizedCarousel = useMemo(
-    () => <Carousel data = {datas} autoPlay={true} pagination={true} />,
+    () => <Carousel data={datas} autoPlay={true} pagination={true} />,
     [datas]
   );
 
@@ -91,34 +113,53 @@ const Home = React.memo(() => {
                 </Text>
               </View>
               <View className="bg-transparent  w-full bottom-4 ">
-                <View className="p-2 relative">
-                  <View className=" left-6 z-10 top-[52%] ">
-                    <MaterialIcons name="search" size={30} color="#999" />
-                  </View>
-                  <TextInput
-                    className="py-4 bg-white mx-2 pl-12  rounded-lg"
-                    placeholder="Search Destination "
-                  />
-                </View>
+              <View className="relative">
+            <View className="absolute z-10 top-10 right-8">
+              <MaterialIcons name="search" size={24} color="#999" />
+            </View>
+            <TextInput
+            value={inputData}
+            onChangeText={(text) =>{
+              setInputData(text)
+              handleFilter(text);
+            } }
+            onFocus={() => setIsFocused(true)}
+              placeholder="Search Destination"
+              className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
+            />
+          </View>
               </View>
             </View>
-            <View className = " h-14 items-center justify-center">
-            <HomeGridComponent/>
-
+            <View className=" h-14 items-center justify-center">
+              <HomeGridComponent />
+              
             </View>
 
-            <ContentLayout
-              data={datas}
-              title={t("homepage.firstpage.sites.sites_cards.religious")}
-              category={t("homepage.firstpage.sites.sites_category.religious")}
-              linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
-            />
+            {isFocused && filteredData.length >0 ? (
+              
+              filteredData.map((item) => (
+                <>
+                <PlaceCard key={item._id} item={item} />
+
+                </>
+              ))
+            ) : (
+              <ContentLayout
+                data={datas}
+                title={t("homepage.firstpage.sites.sites_cards.religious")}
+                category={t(
+                  "homepage.firstpage.sites.sites_category.religious"
+                )}
+                linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
+              />
+            )}
           </ScrollView>
 
-          <Menu />
           <Sheet show={show} setShow={setShow} />
         </MainContainer>
       )}
+          <Menu />
+
     </>
   );
 });

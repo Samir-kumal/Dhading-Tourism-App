@@ -64,24 +64,31 @@ import { Menu } from "../../screens/nav";
   
   const ThingsToDoContainer = () => {
     const router = useRouter();
+    const [inputData, setInputData] = React.useState("");
+    const [filteredData, setFilteredData] = React.useState(Data);
   
-    const handleClick = (item) => {
-      router.push({
-        pathname: "/thingstododetail",
-        params: {
-          title: item.name,
-          // placeId: _id,
-          // description: item.description,
-          // totalRating: totalRating,
-          // coordinates: coordinates.coordinates,
-          // wardno: wardno,
-          // location: location,
-          url: item.image,
-          desc:item.desc2,
-          price:item.price
-        },
-      });
-    }
+    // const handleClick = (item) => {
+    //   router.push({
+    //     pathname: "(places)/thingstododetail",
+    //     params: {
+    //       title: item.name,
+    //       // description: item.description,
+    //       // totalRating: totalRating,
+    //       // coordinates: coordinates.coordinates,
+    //       // wardno: wardno,
+    //       // location: location,
+    //       images: item.image,
+    //       description:item.desc2,
+    //       price:item.price
+    //     },
+    //   });
+    // }
+    const handleFilter = (text) => {
+      const filteredItems = Data.filter((item) =>
+        item.name.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredData(filteredItems);
+    };
     return (
     <>
       <ScrollView>
@@ -110,15 +117,20 @@ import { Menu } from "../../screens/nav";
               <Feather name="search" size={24} color="#999" />
             </View>
             <TextInput
+            value={inputData}
+            onChangeText={(text) =>{
+              setInputData(text)
+              handleFilter(text);
+            } }
               placeholder="Search Destination"
               className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
             />
           </View>
           <View className="flex flex-row flex-wrap justify-center">
-            {Data.map((item) => {
+            {filteredData.map((item) => {
               return (
-                <TouchableOpacity
-                onPress={()=>handleClick(item)}
+                <View
+                // onPress={()=>handleClick(item)}
                   key={item.id}
                   className="bg-white  w-[90vw] flex flex-row items-center rounded-xl mx-2 h-44 my-4 shadow-lg"
                 >
@@ -136,15 +148,15 @@ import { Menu } from "../../screens/nav";
                       <Text className="text-black text-xl font-semibold">
                         {item.name}
                       </Text>
-                      <Text className="text-black opacity-60 text-sm ">
+                      {/* <Text className="text-black opacity-60 text-sm ">
                         {item.price}
-                      </Text>
+                      </Text> */}
                       <Text className="text-black opacity-40 w-44 mt-4 text-left text-xs ">
                         {item.desc}
                       </Text>
                     </View>
                   
-                </TouchableOpacity>
+                </View>
               );
             })}
           </View>

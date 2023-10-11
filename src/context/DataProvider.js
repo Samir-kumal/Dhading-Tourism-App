@@ -20,10 +20,9 @@ export const DataProvider = (props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [lang, setLang] = useState(null);
   const { WEATHER_API_KEY } = Constants.manifest.extra;
-  const headers = {
-    Authorization: "Bearer 3fba649578447eb76c59", // Replace 'SampleToken123' with your sample token
-    "Content-Type": "application/json", // You can add more headers if needed
-  };
+  const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
+  const url2 =  `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
+  const token = "3fba649578447eb76c59";
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -57,15 +56,19 @@ export const DataProvider = (props) => {
     try {
       setLoading(true);
       if (i18n.language === "eng") {
-        const response = await axios.get(
-          // "http://prayatan.jwalamukhimun.gov.np/v1/places/en",
-          `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`,
-          // { headers }
+        // const response = await axios.get( url, {
+        //   headers: {
+        //     'Authorization': 'Bearer ' + token,
+        //   }
+        // });
+        const response = await axios.get( url2
+          
+         
         );
         const data = response.data.places;
         const Pages = response.data.totalCount;
         setDatas(data);
-        // console.log("Data",data);
+        console.log("Data",data);
 
         setTotalPages(Pages);
       } else {

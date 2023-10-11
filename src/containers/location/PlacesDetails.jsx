@@ -35,14 +35,12 @@ const LABEL_HEADER_MARGIN = 100;
 const PlacesDetails = () => {
   const {
     title,
-    placeId,
     totalRating,
     description,
     coordinates,
     location,
     wardno,
     images,
-    url,
   } = useLocalSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const height = Dimensions.get("window").height * 0.8;
@@ -208,7 +206,9 @@ const PlacesDetails = () => {
               {/* Bottom Section */}
               <View className="flex flex-row items-center justify-between mx-4 mt-6">
                 <View className="w-60">
-                  <Text style={styles.header}>Location: {location} </Text>
+                <Text style={styles.header}>Name: {title} </Text>
+
+                  <Text style={styles.location}>Location: {location} </Text>
                   <View className="flex flex-row">
                     <MaterialIcons
                       name="location-pin"
@@ -312,12 +312,18 @@ const PlacesDetails = () => {
 export default PlacesDetails;
 const styles = StyleSheet.create({
   header: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     color: "black",
   },
+  location:{
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
+    opacity:0.7
+  },
   subheader: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "500",
     color: "grey",
   },

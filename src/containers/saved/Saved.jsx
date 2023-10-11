@@ -11,7 +11,7 @@ const Saved = () => {
   const router = useRouter();
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const fetchData = useCallback(async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@liked_items");
@@ -46,7 +46,7 @@ const Saved = () => {
         <View
           style={{
             height: 470,
-            backgroundColor: "white",
+            backgroundColor: Colors.theme,
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -61,8 +61,13 @@ const Saved = () => {
               <PlaceCard key={item._id} item={item} />
             ))
           ) : (
-            <View className="flex items-center justify-center mt-1">
-              <Image source={images.notfound} className="h-[50vh] w-full" />
+            <View className="flex items-center justify-center mx-2 mt-1">
+              <View className="h-96 w-full items-center justify-center">
+                <Image
+                  source={require("../../../assets/wishlist/wishlist.png")}
+                  style={{ width: "80%", height: "100%", resizeMode: "contain" }}
+                />
+              </View>
               <Text className="text-3xl font-bold flex-warp">
                 {t("savedPage.title")}
               </Text>
@@ -71,7 +76,7 @@ const Saved = () => {
                 onPress={() => router.push("/location")}
               >
                 <Text className="text-2xl text-white">
-                {t("savedPage.button")}
+                  {t("savedPage.button")}
                 </Text>
               </Pressable>
             </View>

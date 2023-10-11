@@ -15,13 +15,13 @@ const Location = () => {
 
   return (
     <>
-      {/* <Maps data={datas} /> */}
+      <Maps data={datas} />
     
         <Pressable
-          onPress={() => router.back()}
-          className="h-12 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-10 z-20  flex items-center justify-center"
+          onPress={() => router.push("/home")}
+          className="h-10 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-10 z-20  flex items-center justify-center"
         >
-          <Ionicons name="arrow-back-circle-outline" size={32} color="black" />
+          <Ionicons name="arrow-back-circle-outline" size={28} color="black" />
           <Text className = "text-md font-bold">Back</Text>
         </Pressable>
   

@@ -141,11 +141,12 @@ const RootLayout = () => {
                    <Stack.Screen
                   name="(places)/sights"
                   options={{
-                    headerTitle: "Nearby Places",
+                    headerTitle: "All Places",
                   }}
                 />
-                   <Stack.Screen
-                  name="(places)/thingstodo"
+      
+                      <Stack.Screen
+                  name="(places)/thingstododetail"
                   options={{
                     headerTitle: "",
                     headerShown:false

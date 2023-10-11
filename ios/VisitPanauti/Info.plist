@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>Visit Panauti</string>
+    <string>Visit Dhadhing</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -26,20 +26,20 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>wine-dwine</string>
-          <string>com.nexsewa.winedwine</string>
+          <string>com.bms.dhadhingapp</string>
         </array>
       </dict>
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+visit-panauti</string>
+          <string>exp+visit-dhadhing</string>
         </array>
       </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1.0.0</string>
     <key>GMSApiKey</key>
-    <string>AIzaSyA_iLTcL1vBCETujAlAbo1WB1gbsqtDGSw</string>
+    <string>AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -56,7 +56,7 @@
       </dict>
     </dict>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Allow Panauti-app to use your location.</string>
+    <string>Allow Dhadhing-app to use your location.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your location</string>
     <key>NSLocationWhenInUseUsageDescription</key>

@@ -16,7 +16,23 @@ const TabsLayout = () => {
         },
         headerShown: false,
       }}
+
     >
+      <Tabs.Screen name="likes" 
+      options={{
+        title: "Home",
+        headerShown: true,
+        headerTitleStyle: {
+          color: "#000",
+          fontSize: 25,
+          fontWeight: "bold",
+        },
+        headerTitleAlign: "center",
+        headerTitle: "Saved Places",
+        
+
+      }}
+      />
       
     </Tabs>
   );

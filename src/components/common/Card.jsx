@@ -104,9 +104,12 @@ const Card = (props) => {
           }}
         />
 
-        <View className="absolute bottom-0">
-          <Text className="item-title text-white bottom-0 left-4 flex-wrap text-[16px] font-bold pb-1  pl-2 ">
+        <View style = {{width:width}} className=" absolute bottom-0  flex">
+          <Text className="item-title text-white w-['88%'] text-[16px] font-bold pb-1  pl-2 ">
             {item.title}
+          </Text>
+          <Text className="item-title text-white w-['88%'] text-[16px] font-bold pb-1  pl-2 ">
+            ward no. {item.wardno}
           </Text>
         </View>
       </Pressable>

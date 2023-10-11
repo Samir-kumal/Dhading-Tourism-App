@@ -15,7 +15,6 @@ export default function Likes() {
             <StatusBar style={colorScheme === 'dark' ? 'light-content' : 'dark-content'}   />
 
       <ScrollView className="mb-16" showsVerticalScrollIndicator={false}>
-        <Header show={show} setShow={setShow} />
         <Saved />
       </ScrollView>
       <Menu />

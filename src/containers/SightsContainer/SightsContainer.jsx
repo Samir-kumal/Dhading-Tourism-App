@@ -5,6 +5,8 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  TouchableOpacity,
+  SectionList,
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
@@ -16,43 +18,65 @@ import CircleWrapper from "../../components/common/CircleWrapper";
 import PlaceCard from "../../components/common/PlaceCard";
 import { useLocalSearchParams } from "expo-router";
 import Colors from "../../constants/themes";
+import { FlashList } from "@shopify/flash-list";
 
-const dataList = [
-  {
-    id: 0,
-    name: "Natural",
-  },
-  {
-    id: 1,
-    name: "Religious",
-  },
-  {
-    id: 2,
-    name: "Historical",
-  },
-];
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const SightsContainer = () => {
   const { datas } = useDataProvider();
-  const flatListRef = useRef();
-  const [selectedCategory, setCategory] = useState(dataList[0].name);
+  const scrollViewRef = useRef();
+  // const [selectedCategory, setCategory] = useState(dataList[0].name);
   const [activeIndex, setActiveIndex] = useState(0);
   const [pressed, setPressed] = useState(false);
   const { categoryType } = useLocalSearchParams();
   const [isLoading, setIsLoading] = useState(true);
-  const filteredData = datas.slice(0, 20);
+  const [filteredData, setFilteredData] = useState(datas);
+  const [inputData, setInputData] = React.useState("");
 
-  const categoryData = datas.reduce((acc, item) => {
+  const handleFilter = (text) => {
+    const filteredItems = datas.filter((item) =>
+      item.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
+
+
+  const categoryData = filteredData.reduce((acc, item) => {
     if (!acc[item.category.toLowerCase()]) {
       acc[item.category.toLowerCase()] = item;
     }
     return acc;
   }, {});
+
+  // to get the category items
   const [categoryItems, setCategoryItems] = useState(
-    Object.values(categoryData).slice(0, 8)
+    Object.values(categoryData)
   );
+
+  // code that organizes the data based on category
+  const [organizedData, setOrganizedData] = useState([]);
+  const organizeData = (apiData) => {
+    return apiData.reduce((acc, item) => {
+      const category = item.category;
+      const existingCategory = acc.find(
+        (c) => c.category.toLowerCase() === category.toLowerCase()
+      );
+
+      if (existingCategory) {
+        existingCategory.data.push(item);
+      } else {
+        acc.push({ category, data: [item] });
+      }
+
+      return acc;
+    }, []);
+  };
+
+  useEffect(() => {
+    const data = organizeData(filteredData);
+    setOrganizedData(data);
+  }, []);
 
   useEffect(() => {
     if (categoryType) {
@@ -71,7 +95,7 @@ const SightsContainer = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
-      console.log(categoryItems);
+      // console.log(categoryItems);
     } else {
       setIsLoading(true);
     }
@@ -82,34 +106,15 @@ const SightsContainer = () => {
       const positionX = event.nativeEvent.contentOffset.x;
       const index = Math.round(positionX / width);
       setActiveIndex(index);
-      console.log(index);
-      if (index === 0) {
-        setCategory(dataList[0].name);
-      } else if (index === 1) {
-        setCategory(dataList[1].name);
-      } else {
-        setCategory(dataList[2].name);
-      }
+      console.log("active index", index);
     }
   };
 
-  const getItemLayout = (data, index) => ({
-    length: width,
-    offset: width * index,
-    index,
-  });
-
   const handlePress = (id) => {
     setPressed(true);
-    flatListRef.current.scrollToIndex({ index: id, animated: true });
+    const xOffset = id * width;
+    scrollViewRef.current.scrollTo({ x: xOffset, animated: true });
     setActiveIndex(id);
-    if (id === 0) {
-      setCategory(dataList[0].name);
-    } else if (id === 1) {
-      setCategory(dataList[1].name);
-    } else {
-      setCategory(dataList[2].name);
-    }
 
     setTimeout(() => {
       setPressed(false);
@@ -127,33 +132,35 @@ const SightsContainer = () => {
             <Feather name="search" size={24} color="#999" />
           </View>
           <TextInput
+          value={inputData}
+          onChangeText={(text) =>{
+            setInputData(text)
+            handleFilter(text);
+          } }
             placeholder="Search Destination"
             className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
           />
         </View>
-        <View className = "my-4">
+        <View className="my-4">
           <FlatList
             className=""
             data={categoryItems}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item._id}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Pressable
                 onPress={() => handlePress(index)}
-                key={item._id}
+                key={index}
                 className={
-                  // activeIndex === index
-                  //   ?
-                  "px-4 py-1 mx-2 rounded-lg bg-[#B0C8B9] text-white "
-                  //   : "px-4 py-1 "
+                  activeIndex === index
+                    ? "px-4 py-1 mx-2 rounded-lg bg-[#B0C8B9] text-white "
+                    : "px-4 py-1 "
                 }
               >
                 <Text
                   className={
-                    //   activeIndex === index ?
-                    "text-lg text-white"
-                    //    : "text-lg"
+                    activeIndex === index ? "text-lg text-white" : "text-lg"
                   }
                 >
                   {item.category}
@@ -162,49 +169,42 @@ const SightsContainer = () => {
             )}
           />
         </View>
-
-        <View>
+        <ScrollView
+          onScroll={handleScroll}
+          ref={scrollViewRef}
+          pagingEnabled
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
           {!isLoading ? (
-            <FlatList
-              className="h-full "
-              getItemLayout={getItemLayout}
-              data={categoryItems}
-              ref={flatListRef}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              pagingEnabled={true}
-              keyExtractor={(item) => item._id}
-              onScroll={handleScroll}
-              renderItem={({ item }) => (
-                <View className="w-[100vw] flex  items-center  bg-slate-100 h-full">
-                  <View className=" px-4 py-6 w-full ">
-                    <Text className="text-xl font-bold">
-                      {item.category} Destination
-                    </Text>
-                  </View>
-                  {/* <View className="mb-32">
-                    <FlatList
-                      data={datas}
-                      keyExtractor={(item) => item._id}
-                      showsVerticalScrollIndicator={false}
-                      renderItem={({ item }) => (
-                        <>
-                          {item.category.toLowerCase() ===
-                            category.toLowerCase() && <PlaceCard item={item} />}
-                        </>
-                      )}
-                    />
-                  </View> */}
+            organizedData.map((categoryData, index) => (
+              <View
+                style={{ width, height, backgroundColor: "#fff" }}
+                key={index}
+              >
+                <View className=" px-4 py-6 w-full ">
+                  <Text className="text-xl font-bold">
+                    {categoryData.category} Destination
+                  </Text>
                 </View>
-              )}
-            />
+                <FlashList
+                  data={categoryData.data}
+                  estimatedItemSize={240}
+                  keyExtractor={(item) => item._id}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item }) => (
+                    <PlaceCard item={item} key={item._id} />
+                  )}
+                />
+              </View>
+            ))
           ) : (
-            <View className="w-full h-[50vh] bg-red flex items-center justify-center ">
+            <View className="w-[100vw] h-[50vh] flex items-center justify-center ">
               <ActivityIndicator size="large" color={Colors.primary} />
               <Text>Loading...</Text>
             </View>
           )}
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

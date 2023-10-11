@@ -20,7 +20,7 @@ module.exports = {
     bundleIdentifier: "com.bms.dhadhingapp",
     buildNumber: "1.0.0",
     config: {
-      googleMapsApiKey: "AIzaSyA_iLTcL1vBCETujAlAbo1WB1gbsqtDGSw",
+      googleMapsApiKey: "AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80",
     },
   },
   android: {
@@ -40,7 +40,7 @@ module.exports = {
     versionCode: 7,
     config: {
       googleMaps: {
-        apiKey: "AIzaSyA8AnRa8mAWDg-f-xtwzOODNmGnv-0ntPk",
+        apiKey: "AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80",
       },
     },
   },
