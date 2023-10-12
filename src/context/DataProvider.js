@@ -81,50 +81,50 @@ export const DataProvider = (props) => {
 
   useEffect(() => {
     fetchData();
-    localizationGet();
+    // localizationGet();
   }, [lang]);
 
   // get the localization value from AsyncStorage
-  const localizationGet = async () => {
-    try {
+  // const localizationGet = async () => {
+  //   try {
       
-      const value = await AsyncStorage.getItem("@user_localization");
-      if (value !== null) {
-        i18n.changeLanguage(value);
-        setLang(value);
-      }
-    } catch (error) {
-      console.log("Error retrieving data" + error);
-    }
-  };
+  //     const value = await AsyncStorage.getItem("@user_localization");
+  //     if (value !== null) {
+  //       i18n.changeLanguage(value);
+  //       setLang(value);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error retrieving data" + error);
+  //   }
+  // };
 
-  const LocalizationSave = async (value) => {
-    try {
-      await AsyncStorage.setItem("@user_localization", value);
-    } catch (error) {
-      console.log("Error saving data" + error);
-    }
-  }
+  // const LocalizationSave = async (value) => {
+  //   try {
+  //     await AsyncStorage.setItem("@user_localization", value);
+  //   } catch (error) {
+  //     console.log("Error saving data" + error);
+  //   }
+  // }
 
-  const handleChange = () => {
-    if(i18n.language === "nep"){
-      i18n.changeLanguage("eng");
-      setLang("eng");
-      LocalizationSave("eng");
+  // const handleChange = () => {
+  //   if(i18n.language === "nep"){
+  //     i18n.changeLanguage("eng");
+  //     setLang("eng");
+  //     LocalizationSave("eng");
 
-    } else {
-      i18n.changeLanguage("nep")
-      setLang("nep");
-      LocalizationSave("nep");
-    }
-  }
+  //   } else {
+  //     i18n.changeLanguage("nep")
+  //     setLang("nep");
+  //     LocalizationSave("nep");
+  //   }
+  // }
 
   const contextValue = useMemo(
     () => ({
       datas,
       error,
       loading,
-      handleChange,
+      // handleChange,
       fetchNextPage,
     }),
     [datas, error, loading]

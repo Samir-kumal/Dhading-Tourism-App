@@ -176,9 +176,10 @@ const SightsContainer = () => {
               <Pressable
                 onPress={() => handlePress(index)}
                 key={index}
+                // style = {{backgroundColor:Colors.DarkGreen}}
                 className={
                   activeIndex === index
-                    ? "px-4 py-1 mx-2 rounded-lg bg-[#B0C8B9] text-white "
+                    ? `px-4 py-1 mx-2 rounded-lg bg-[${Colors.DarkGreen}]  text-white `
                     : "px-4 py-1 "
                 }
               >

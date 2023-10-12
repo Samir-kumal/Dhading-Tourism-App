@@ -27,11 +27,7 @@ const SettingContainer = ({ name, email, phone, signOut}) => {
         pathname: "/about",
       });
       
-    } else if (item === "Language Preferences") {
-      router.push({
-        pathname: "/language",
-      });
-    }  
+    } 
   }
   return (
     <View>

@@ -10,6 +10,7 @@ import {
 import * as Svg from "react-native-svg";
 import { Ionicons, FontAwesome, MaterialIcons, Entypo } from "@expo/vector-icons";
 import { icons } from "../../constants";
+import Colors from "../../constants/themes";
 
 export default function Menu() {
   const router = useRouter();
@@ -23,12 +24,12 @@ export default function Menu() {
   return (
     <View className="absolute bottom-0 w-full z-20  ">
       <View
-        className={`  h-16 w-[${windowWidth}]  bg-[#fff] flex-row items-center  justify-around  rounded-md rounded-b`}
+        className={`  h-16 w-[${windowWidth}]  bg-white flex-row items-center  justify-around  rounded-md rounded-b`}
       >
         <TouchableOpacity
           style={
             (styles.container,
-            { backgroundColor: path === "/home" ? "#B0C8B9" : "#fff" })
+            { backgroundColor: path === "/home" ? Colors.DarkGreen : Colors.white })
           }
           className=" flex  py-1 px-4 rounded-xl  items-center justify-center "
           onPress={() => {
@@ -38,14 +39,14 @@ export default function Menu() {
           <Ionicons
             name="ios-home"
             size={24}
-            color={path === "/home" ? "#fff" : "black"}
+            color={path === "/home" ? Colors.white : "black"}
           />
          {path === "/home" && <Text style={styles.text}>Home</Text>}
         </TouchableOpacity>
         <TouchableOpacity
           style={
             (styles.container,
-            { backgroundColor: path === "/location" ? "#B0C8B9" : "#fff" })
+            { backgroundColor: path === "/location" ? Colors.DarkGreen : Colors.white })
           }
           className=" flex  py-1 px-4 rounded-xl  items-center justify-center"
           onPress={() => {
@@ -58,7 +59,7 @@ export default function Menu() {
           <FontAwesome
             name="safari"
             size={24}
-            color={path === "/location" ? "#fff" : "black"}
+            color={path === "/location" ? Colors.white: "black"}
           />
           {path === "/location" && <Text style={styles.text}>Location</Text>}
 
@@ -66,7 +67,7 @@ export default function Menu() {
         <TouchableOpacity
           style={
             (styles.container,
-            { backgroundColor: path === "/likes" ? "#B0C8B9" : "#fff" })
+            { backgroundColor: path === "/likes" ? Colors.DarkGreen : Colors.white })
           }
           className=" flex  py-1 px-4 rounded-xl  items-center justify-center"
           onPress={() => router.push("/(tabs)/likes")}
@@ -75,7 +76,7 @@ export default function Menu() {
           <Ionicons
             name="ios-heart-sharp"
             size={26}
-            color={path === "/likes" ? "#fff" : "black"}
+            color={path === "/likes" ? Colors.white : "black"}
           />
            {path === "/likes" && <Text style={styles.text}>Likes</Text>}
 
@@ -83,7 +84,7 @@ export default function Menu() {
         <TouchableOpacity
           style={
             (styles.container,
-            { backgroundColor: path === "/thingstodo" ? "#B0C8B9" : "#fff" })
+            { backgroundColor: path === "/thingstodo" ? Colors.DarkGreen :Colors.white })
           }
           className="  flex  py-1 px-4 rounded-xl  items-center justify-center"
           onPress={() => router.push("/thingstodo")}
@@ -91,7 +92,7 @@ export default function Menu() {
           <Entypo
             name="suitcase"
             size={26}
-            color={path === "/thingstodo" ? "#fff" : "black"}
+            color={path === "/thingstodo" ? Colors.white: "black"}
           />
            {path === "/thingstodo" && <Text style={styles.text}>Things To Do</Text>}
           
@@ -102,7 +103,7 @@ export default function Menu() {
 }
 const styles = StyleSheet.create({
   text: {
-    color: "#fff",
+    color: Colors.white,
     fontWeight: "bold",
     fontSize: 12,
   },

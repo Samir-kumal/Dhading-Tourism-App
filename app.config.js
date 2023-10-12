@@ -1,6 +1,6 @@
 module.exports = {
-  name: "Visit Dhadhing",
-  slug: "visit-Dhadhing",
+  name: "Visit Jwalamukhi",
+  slug: "visit-jwalamukhi",
   version: "7.0.0",
   orientation: "portrait",
   scheme: "wine-dwine",
@@ -62,8 +62,8 @@ module.exports = {
   extra: {
     WEATHER_API_KEY: "f873e2396c79be34489bd8d70b7e5f32",
     "eas": {
-        "projectId": "81b0f18e-87f4-4c85-961d-48629fc7ea87"
-      }
+      "projectId": "cceb7cd0-30ec-46a8-bdfd-4ada1e78ab0f"
+    }
   },
   owner: "samir_kumal",
   sdkVersion: "48.0.0",
