@@ -23,7 +23,7 @@ export const DataProvider = (props) => {
   const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
   const url2 =  `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
   const token = "3fba649578447eb76c59";
-
+  const [videoData,setVideoData] = useState(null)
 
  
   const fetchNextPage = () => {
@@ -78,6 +78,14 @@ export const DataProvider = (props) => {
     }
   };
 
+  const FetchVideoData = async () =>{
+    const response = await axios.get('http://prayatan.jwalamukhimun.gov.np/v1/video-link');
+    setVideoData(response.data)
+  }
+ useEffect(()=>{
+  FetchVideoData()
+
+ },[])
   useEffect(() => {
     fetchData();
     // localizationGet();
@@ -118,6 +126,8 @@ export const DataProvider = (props) => {
   //   }
   // }
 
+  
+
   const contextValue = useMemo(
     () => ({
       datas,
@@ -125,8 +135,9 @@ export const DataProvider = (props) => {
       loading,
       // handleChange,
       fetchNextPage,
+      videoData
     }),
-    [datas, error, loading]
+    [datas, error, loading,videoData]
   );
 
   return (
