@@ -79,9 +79,7 @@ const Signin = () => {
   return (
     <>
       <SafeAreaView className="bg-secondary flex-1 h-full">
-        <StatusBar
-          style={colorScheme === "dark" ? "light-content" : "dark-content"}
-        />
+        
         <View className="z-10  h-0">
           <CircleWrapper />
         </View>

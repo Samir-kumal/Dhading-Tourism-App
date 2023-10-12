@@ -12,6 +12,7 @@ import {
   import { Feather } from "@expo/vector-icons";
   import { useRouter } from "expo-router";
 import { Menu } from "../../screens/nav";
+import { StatusBar } from "expo-status-bar";
   
   const Data = [
     {
@@ -91,7 +92,9 @@ import { Menu } from "../../screens/nav";
     };
     return (
     <>
-      <ScrollView>
+      <ScrollView className="mb-16">
+      <StatusBar backgroundColor="transparent"/>
+
         <SafeAreaView className="relative h-52 w-[100vw]">
           <ImageBackground
             source={require("../../../assets/Events/events.png")}
@@ -162,7 +165,6 @@ import { Menu } from "../../screens/nav";
           </View>
         </View>
       </ScrollView>
-      <Menu/>
     </>
     );
   };

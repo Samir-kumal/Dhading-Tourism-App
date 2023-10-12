@@ -37,7 +37,6 @@ const Sheet = ({ show, setShow }) => {
   // renders
   return (
     <>
-      <StatusBar backgroundColor="#0000003a" />
       {show && (
         <Pressable
           className="absolute flex-1 z-50 w-full h-full bottom-0 left-0  bg-[#0000003a]"

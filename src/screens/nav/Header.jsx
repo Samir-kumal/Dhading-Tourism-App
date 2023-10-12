@@ -25,7 +25,7 @@ const Header = ({ show, setShow }) => {
               {user?.photoURL || user?.photo ? (
                 <Image
                   className="w-full h-full rounded-full"
-                  source={{ uri: user?.photoURL || user?.photo }}
+                  source={{ uri: user?.photoURL || user?.photo }} 
                 />
               ) : (
                 <Image

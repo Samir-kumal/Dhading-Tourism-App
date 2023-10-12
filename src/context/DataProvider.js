@@ -55,7 +55,6 @@ export const DataProvider = (props) => {
         const data = response.data.places;
         const Pages = response.data.totalCount;
         setDatas(data);
-        console.log("Data",data);
 
         setTotalPages(Pages);
       } else {

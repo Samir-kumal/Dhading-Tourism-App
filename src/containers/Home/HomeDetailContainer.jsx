@@ -11,7 +11,6 @@ const HomeDetailContainer = () => {
   const categories = ["Religious", "Natural", "Tourism", "Municipality"];
   const { t } = useTranslation();
   const handlePress = (item) => {
-    console.log("pressed");
     router.push({
       pathname: "/sights",
       params: {
@@ -20,8 +19,8 @@ const HomeDetailContainer = () => {
     });
   };
   return (
-    <ScrollView className="flex gap-y-8 bg-white" showsVerticalScrollIndicator={false}>
-      <View className="  rounded-xl bg-secondary">
+    <ScrollView className="flex gap-y-2 bg-white" showsVerticalScrollIndicator={false}>
+      <View className="  rounded-xl ">
         {/* <View className="h-16 flex items-center justify-center ">
           <Text className="text-2xl font-bold opacity-70">Popular Places</Text>
         </View> */}
@@ -39,7 +38,7 @@ const HomeDetailContainer = () => {
           </View>
         </SeeMoreButton>
       </View>
-      <View className="bg-secondary  rounded-xl">
+      <View className=" rounded-xl">
         {/* <View className="h-16 flex items-center justify-center ">
           <Text className="text-2xl font-bold opacity-70">
             Religious Places
@@ -59,7 +58,7 @@ const HomeDetailContainer = () => {
           </View>
         </SeeMoreButton>
       </View>
-      <View className="bg-secondary  rounded-xl">
+      <View className=" rounded-xl">
         {/* <View className="h-16 flex items-center justify-center ">
           <Text className="text-2xl font-bold opacity-70">
             Historical Places
@@ -79,7 +78,7 @@ const HomeDetailContainer = () => {
           </View>
         </SeeMoreButton>
       </View>
-      <View className="bg-secondary  rounded-xl">
+      <View className="  rounded-xl">
         {/* <View className="h-16 flex items-center justify-center ">
           <Text className="text-2xl font-bold opacity-70">
             Historical Places

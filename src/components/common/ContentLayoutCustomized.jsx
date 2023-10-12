@@ -63,7 +63,7 @@ const ContentLayoutCustomized = ({ title, data, category, linkButton }) => {
   };
 
   return (
-    <View className=" w-full bg-secondary rounded-xl mt-3 ">
+    <View className=" w-full  rounded-xl mb-4 ">
       <View className = "flex flex-row items justify-between mx-4">
         <Text className="font-bold text-2xl mt-4 mb-2">{title}</Text>
         {/* <TouchableOpacity className = "flex items-center justify-center" onPress={() => router.push("/homedetail")}>
