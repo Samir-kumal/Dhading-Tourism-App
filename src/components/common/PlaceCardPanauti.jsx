@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
 import ExpoFastImage from "expo-fast-image";
 
@@ -9,12 +9,12 @@ const PlaceCardPanauti = (props) => {
     <View className={`  p-2  w-full ${props.class} `}>
       <View className=" my-2 rounded-lg relative flex justify-between pb-4 bg-[#f2f2f2] ">
         <Pressable className="h-fit rounded w-full">
-          <ExpoFastImage
-          
-          className="h-36 w-full rounded "
-            uri="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Panauti_Core_Settlement.jpg/800px-Panauti_Core_Settlement.jpg" 
-            cacheKey="key"
-            
+          <Image
+            className="h-36 w-full rounded "
+            source={{
+              uri: "https://www.nepalarchives.com/wp-content/uploads/2019/11/Jwalamukhi-Rural-Municipality-Dhading-Province-No.-3-Nepal-scaled.jpg",
+            }}
+            style= {{objectFit:"contain"}}
           />
 
           <View className="absolute z-10 right-2 top-2"></View>

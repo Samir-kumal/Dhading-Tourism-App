@@ -20,12 +20,13 @@ const ItemBtns = ({ text, title }) => {
           className="h-10 w-10 shadow-lg bg-[#f2f2f2] rounded-full justify-center items-center mx-5"
           onPress={openMap}
         >
-          <Svg.SvgXml xml={icons.sendBtn} />
+          {/* <Svg.SvgXml xml={icons.sendBtn} /> */}
+        <Speech text={text} className="mx-5" />
+
         </Pressable>
         <Text className="pt-1">Go</Text>
       </View>
       <View>
-        <Speech text={text} className="mx-5" />
         <Text className="pt-1">Audio</Text>
       </View>
     </View>

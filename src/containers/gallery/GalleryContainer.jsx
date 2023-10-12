@@ -55,8 +55,8 @@ const GalleryContainer = ({ data }) => {
             <Image
               className="w-full h-full rounded-lg "
               source={{
-                 uri:`http://103.140.1.252/v1/places/image/${item.images[0]}`
-                //  uri:`http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`
+                //  uri:`http://103.140.1.252/v1/places/image/${item.images[0]}`
+                 uri:`http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`
 
               }}
             />

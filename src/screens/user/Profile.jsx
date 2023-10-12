@@ -194,66 +194,7 @@ const UserProfile = ({ setName, setEmail, setPhone }) => {
   );
 };
 //9818732092
-const UserProfile2 = ({ name, email, phone, gender }) => {
-  const router = useRouter();
-  const { signOut } = useAuth();
 
-  return (
-    <MainContainer>
-      <View style={[styles.container, styles.additionalContainer]}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            router.push({
-              pathname: "/details",
-              params: { name, email, phone },
-            })
-          }
-        >
-          <View style={styles.buttonContent}>
-            <View style={styles.myDetails}>
-              <Svg.SvgXml xml={icons.profileCircle} />
-              <Text style={styles.buttonText}>My Details</Text>
-            </View>
-            <View style={styles.arrow}>
-              <Svg.SvgXml xml={icons.arrowRight} />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/about")}
-        >
-          <View style={styles.buttonContent}>
-            <View style={styles.myDetails}>
-              <Svg.SvgXml xml={icons.about} />
-              <Text style={styles.buttonText}>About</Text>
-            </View>
-            <View style={styles.arrow}>
-              <Svg.SvgXml xml={icons.arrowRight} />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            signOut();
-          }}
-        >
-          <View style={styles.buttonContent}>
-            <View style={styles.myDetails}>
-              <Svg.SvgXml xml={icons.logout} />
-              <Text style={styles.buttonText}>Logout</Text>
-            </View>
-            <View style={styles.arrow}>
-              <Svg.SvgXml xml={icons.arrowRight} />
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </MainContainer>
-  );
-};
 
 const Profile = () => {
   const { user, signOut } = useAuth();
@@ -273,15 +214,14 @@ const Profile = () => {
           headerShadowVisible: false,
         }}
       />
-      {Object.keys(user).length > 0 ? (
+      {user && Object.keys(user).length > 0 ? (
         <>
           <UserProfile
             setName={setName}
             setEmail={setEmail}
             setPhone={setPhone}
           />
-          <UserProfile2 name={name} email={email} phone={phone} />
-          <SettingContainer/>
+          <SettingContainer name={name} email={email} phone={phone} signOut = {signOut} />
         </>
       ) : (
         <View className="h-96 items-center justify-center ">

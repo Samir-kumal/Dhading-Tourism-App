@@ -27,12 +27,28 @@ const SightsContainer = () => {
   const { datas } = useDataProvider();
   const scrollViewRef = useRef();
   // const [selectedCategory, setCategory] = useState(dataList[0].name);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(() => {
+    if (categoryType) {
+      if (categoryType === "Religious") {
+        return 0;
+      } else if (categoryType === "Municipality") {
+        return 1;
+      } else if (categoryType === "Natural") {
+        return 3;
+      } else {
+        return 4;
+      }
+    } else {
+      return 0;
+    }
+  });
   const [pressed, setPressed] = useState(false);
   const { categoryType } = useLocalSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState(datas);
   const [inputData, setInputData] = React.useState("");
+
+  
 
   const handleFilter = (text) => {
     const filteredItems = datas.filter((item) =>
@@ -40,7 +56,6 @@ const SightsContainer = () => {
     );
     setFilteredData(filteredItems);
   };
-
 
   const categoryData = filteredData.reduce((acc, item) => {
     if (!acc[item.category.toLowerCase()]) {
@@ -76,20 +91,27 @@ const SightsContainer = () => {
   useEffect(() => {
     const data = organizeData(filteredData);
     setOrganizedData(data);
-  }, []);
+  }, [filteredData]);
 
+  
+
+  // scroll to the selected category
   useEffect(() => {
     if (categoryType) {
-      setCategory(categoryType);
-      if (categoryType === "Popular") {
-        setActiveIndex(0);
-      } else if (categoryType === "Religious") {
-        setActiveIndex(1);
-      } else {
-        setActiveIndex(2);
+      // Find the index of the selected category in the categoryItems array
+      const index = categoryItems.findIndex(
+        (item) => item.category.toLowerCase() === categoryType.toLowerCase()
+      );
+
+      if (index !== -1) {
+        setActiveIndex(index);
+        const xOffset = index * width;
+        scrollViewRef.current.scrollTo({ x: xOffset, animated: true });
       }
     }
-  }, []);
+  }, [categoryType, categoryItems]);
+
+  // to set the loading state of the page
   useEffect(() => {
     if (datas) {
       setTimeout(() => {
@@ -101,6 +123,7 @@ const SightsContainer = () => {
     }
   }, [datas]);
 
+  // to handle the scroll event
   const handleScroll = (event) => {
     if (!pressed) {
       const positionX = event.nativeEvent.contentOffset.x;
@@ -110,6 +133,7 @@ const SightsContainer = () => {
     }
   };
 
+  // to handle the press event
   const handlePress = (id) => {
     setPressed(true);
     const xOffset = id * width;
@@ -132,11 +156,11 @@ const SightsContainer = () => {
             <Feather name="search" size={24} color="#999" />
           </View>
           <TextInput
-          value={inputData}
-          onChangeText={(text) =>{
-            setInputData(text)
-            handleFilter(text);
-          } }
+            value={inputData}
+            onChangeText={(text) => {
+              setInputData(text);
+              handleFilter(text);
+            }}
             placeholder="Search Destination"
             className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
           />
@@ -188,6 +212,7 @@ const SightsContainer = () => {
                   </Text>
                 </View>
                 <FlashList
+                className = 'mb-12'
                   data={categoryData.data}
                   estimatedItemSize={240}
                   keyExtractor={(item) => item._id}

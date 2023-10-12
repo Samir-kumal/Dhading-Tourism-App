@@ -23,7 +23,7 @@ import * as SecureStore from "expo-secure-store";
 
 WebBrowser.maybeCompleteAuthSession();
 const GoogleBtn = () => {
-  const { signIn } = useAuth();d
+  const { signIn } = useAuth();
   const [loading, setLoading] = React.useState(false);
 
   const [request, response, promptAsync] = Google.useAuthRequest({

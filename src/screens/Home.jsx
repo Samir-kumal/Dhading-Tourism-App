@@ -137,9 +137,9 @@ const Home = React.memo(() => {
 
             {isFocused && filteredData.length >0 ? (
               
-              filteredData.map((item) => (
+              filteredData.map((item,index) => (
                 <>
-                <PlaceCard key={item._id} item={item} />
+                <PlaceCard key={index} item={item} />
 
                 </>
               ))

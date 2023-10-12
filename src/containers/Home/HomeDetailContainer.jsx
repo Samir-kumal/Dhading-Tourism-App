@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 const HomeDetailContainer = () => {
   const router = useRouter();
   const { datas } = useDataProvider();
-  const categories = ["Popular", "Religious", "Historical"];
+  const categories = ["Religious", "Natural", "Tourism", "Municipality"];
   const { t } = useTranslation();
   const handlePress = (item) => {
     console.log("pressed");
@@ -34,7 +34,7 @@ const HomeDetailContainer = () => {
         <SeeMoreButton onPress={() => handlePress(categories[0])}>
           <View>
             <Text className="text-lg font-semibold opacity-70">
-              See More Popular Places
+              See More Religious Places
             </Text>
           </View>
         </SeeMoreButton>
@@ -54,7 +54,7 @@ const HomeDetailContainer = () => {
         <SeeMoreButton onPress={() => handlePress(categories[1])}>
           <View>
             <Text className="text-lg font-semibold opacity-70">
-              See More Religious Places
+              See More Natural Places
             </Text>
           </View>
         </SeeMoreButton>
@@ -67,14 +67,34 @@ const HomeDetailContainer = () => {
         </View> */}
         <ContentLayoutCustomized
              data={datas}
-             title={t("homepage.firstpage.sites.sites_cards.historical")}
-             category={t("homepage.firstpage.sites.sites_category.historical")}
+             title={t("homepage.firstpage.sites.sites_cards.tourism")}
+             category={t("homepage.firstpage.sites.sites_category.tourism")}
              linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
         />
         <SeeMoreButton onPress={() => handlePress(categories[2])}>
           <View>
             <Text className="text-lg font-semibold opacity-70">
-              See More Historical Places
+              See More Tourism Places
+            </Text>
+          </View>
+        </SeeMoreButton>
+      </View>
+      <View className="bg-secondary  rounded-xl">
+        {/* <View className="h-16 flex items-center justify-center ">
+          <Text className="text-2xl font-bold opacity-70">
+            Historical Places
+          </Text>
+        </View> */}
+        <ContentLayoutCustomized
+             data={datas}
+             title={t("homepage.firstpage.sites.sites_cards.municipality")}
+             category={t("homepage.firstpage.sites.sites_category.municipality")}
+             linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
+        />
+        <SeeMoreButton onPress={() => handlePress(categories[2])}>
+          <View>
+            <Text className="text-lg font-semibold opacity-70">
+              See More Municipalities
             </Text>
           </View>
         </SeeMoreButton>

@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Constants from "expo-constants";
 import i18n from "../translation";
+import { set } from "react-native-reanimated";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export const DataContext = createContext();
 export function useDataProvider() {
   return React.useContext(DataContext);
@@ -13,32 +15,17 @@ export const DataProvider = (props) => {
   const [datas, setDatas] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [icon, setIcon] = useState("");
-  const [temperature, setTemperature] = useState(null);
+
   const [page, setPage] = useState(1);
   const [limit] = useState(200);
   const [totalPages, setTotalPages] = useState(1);
-  const [lang, setLang] = useState(null);
-  const { WEATHER_API_KEY } = Constants.manifest.extra;
+  const [lang, setLang] = useState('eng');
   const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
   const url2 =  `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
   const token = "3fba649578447eb76c59";
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${27.59375132910493}&lon=${85.52398340333188}&APPID=${WEATHER_API_KEY}&units=metric`
-      )
-        .then((res) => res.json()) // Convert response to JSON format
-        .then((json) => {
-          // Update the component state with the fetched weather data
-          setTemperature(json.main.temp);
-          const { icon } = json.weather[0];
-          setIcon(icon);
-        });
-    };
-    fetchWeatherData();
-  }, []);
+
+ 
   const fetchNextPage = () => {
     setPage((prevPage) => {
       const nextPage = prevPage + 1;
@@ -56,15 +43,15 @@ export const DataProvider = (props) => {
     try {
       setLoading(true);
       if (i18n.language === "eng") {
-        // const response = await axios.get( url, {
-        //   headers: {
-        //     'Authorization': 'Bearer ' + token,
-        //   }
-        // });
-        const response = await axios.get( url2
+        const response = await axios.get( url, {
+          headers: {
+            'api-key': '3fba649578447eb76c59',
+          }
+        });
+        // const response = await axios.get( url2
           
          
-        );
+        // );
         const data = response.data.places;
         const Pages = response.data.totalCount;
         setDatas(data);
@@ -73,7 +60,11 @@ export const DataProvider = (props) => {
         setTotalPages(Pages);
       } else {
         const response = await axios.get(
-          "http://prayatan.jwalamukhimun.gov.np/v1/places/en"
+          url,{
+            headers: {
+              'api-key': '3fba649578447eb76c59',
+            }
+          }
         );
         const data = response.data.places.places;
         const Pages = response.data.places.totalCount;
@@ -90,19 +81,53 @@ export const DataProvider = (props) => {
 
   useEffect(() => {
     fetchData();
-    setLang(i18n.language);
+    localizationGet();
   }, [lang]);
+
+  // get the localization value from AsyncStorage
+  const localizationGet = async () => {
+    try {
+      
+      const value = await AsyncStorage.getItem("@user_localization");
+      if (value !== null) {
+        i18n.changeLanguage(value);
+        setLang(value);
+      }
+    } catch (error) {
+      console.log("Error retrieving data" + error);
+    }
+  };
+
+  const LocalizationSave = async (value) => {
+    try {
+      await AsyncStorage.setItem("@user_localization", value);
+    } catch (error) {
+      console.log("Error saving data" + error);
+    }
+  }
+
+  const handleChange = () => {
+    if(i18n.language === "nep"){
+      i18n.changeLanguage("eng");
+      setLang("eng");
+      LocalizationSave("eng");
+
+    } else {
+      i18n.changeLanguage("nep")
+      setLang("nep");
+      LocalizationSave("nep");
+    }
+  }
 
   const contextValue = useMemo(
     () => ({
       datas,
       error,
       loading,
-      temperature,
-      icon,
+      handleChange,
       fetchNextPage,
     }),
-    [datas, error, loading, temperature, icon]
+    [datas, error, loading]
   );
 
   return (

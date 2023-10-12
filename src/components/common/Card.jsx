@@ -22,7 +22,9 @@ const Card = (props) => {
   const width = Dimensions.get("window").width * 0.45;
   const router = useRouter();
   const { item } = props;
-  const URI = `http://103.140.1.252/v1/places/image/${item.images[0]}`;
+  // const URI = `http://103.140.1.252/v1/places/image/${item.images[0]}`;
+  const URI = `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`;
+
   const str = item.description;
   const desc = limitWords(str, 7) + "..";
 

@@ -5,7 +5,12 @@ import { useRouter } from "expo-router";
 import Loading from "../status/Loading";
 import { images } from "../../constants";
 import { PlaceCardPanauti, PlaceCard } from "../common";
-import { MaterialCommunityIcons, Foundation,MaterialIcons,FontAwesome5 } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  Foundation,
+  MaterialIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
 
 const defaultMarkers = [
   {
@@ -55,10 +60,10 @@ const filterVisibleMarkers = (data, region) => {
 const Maps = ({ data }) => {
   const router = useRouter();
   const [initialRegion, setInitialRegion] = useState({
-    latitude: 27.5832371,
-    longitude: 85.5092157,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
+    latitude: 27.8820062,
+    longitude: 84.770904,
+    latitudeDelta: 0.07,
+    longitudeDelta: 0.07,
   });
 
   const [showContainer, setShowContainer] = useState(false);
@@ -142,6 +147,8 @@ const Maps = ({ data }) => {
     setVisibleMarkers(markersToDisplay);
   };
 
+  console.log("visible markers", visibleMarkers[0].category);
+
   return (
     <>
       {isLoading ? (
@@ -165,8 +172,8 @@ const Maps = ({ data }) => {
           >
             {showContainerMain && (
               <PlaceCardPanauti
-                title="Panauti"
-                description="A charming town in Nepal, captivates visitors with its rich cultural heritage, ancient temples, and picturesque Newari architecture, offering a glimpse into the country's vibrant history and traditions."
+                title="Jwalamukhi"
+                description="Jwalamukhi is a Gaupalika in Dhading District in the Bagmati Zone of central Nepal. The local body was formed by merging four VDCs namely Khari, Dhola, Nepal, Maidi and Chainpur, Bagmati. Currently, it has a total of 7 wards."
               />
             )}
           </Marker>
@@ -184,36 +191,47 @@ const Maps = ({ data }) => {
                 onPress={() => handleMarkerPress(marker)}
                 tracksViewChanges={false}
               >
-                {marker.category.toLowerCase() === "religious" && (
-                  <MaterialCommunityIcons
-                    name="home-minus"
-                    size={24}
-                    color="black"
-                  />
-                )}
-                {marker.category.toLowerCase() ===
-                  "fooding and accomodation" && (
-                  <MaterialCommunityIcons
-                    name="food-fork-drink"
-                    size={24}
-                    color="black"
-                  />
-                )}
-                {marker.category.toLowerCase() === "natural" && (
-                  <Foundation name="trees" size={34} color="green" />
-                )}
-                 {marker.category.toLowerCase() === "official" && (
-                 <MaterialCommunityIcons name="office-building-marker" size={24} color="blue" />
-                )}
-                    {marker.category.toLowerCase() === "agriculture" && (
-                 <MaterialIcons name="agriculture" size={24} color="black" />
-                )}
-                      {marker.category.toLowerCase() === "tourism" && (
-                <FontAwesome5 name="hotel" size={24} color="pink" />
-                )}
-                      {marker.category.toLowerCase() === "historical" && (
-                <MaterialIcons name="museum" size={24} color="grey" />
-                )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "religious" && (
+                    <MaterialCommunityIcons
+                      name="home-minus"
+                      size={24}
+                      color="black"
+                    />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() ===
+                    "fooding and accomodation" && (
+                    <MaterialCommunityIcons
+                      name="food-fork-drink"
+                      size={24}
+                      color="black"
+                    />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "natural" && (
+                    <Foundation name="trees" size={34} color="green" />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "official" && (
+                    <MaterialCommunityIcons
+                      name="office-building-marker"
+                      size={24}
+                      color="blue"
+                    />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "agriculture" && (
+                    <MaterialIcons name="agriculture" size={24} color="black" />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "tourism" && (
+                    <FontAwesome5 name="hotel" size={24} color="pink" />
+                  )}
+                {marker.category &&
+                  marker.category.toLowerCase() === "historical" && (
+                    <MaterialIcons name="museum" size={24} color="grey" />
+                  )}
                 {/* <Image
                   source={images.marker}
                   style={{ height: 30, width: 30 }}
@@ -223,11 +241,8 @@ const Maps = ({ data }) => {
         </MapView>
       )}
       {showContainer && (
-        <View className = "absolute top-20 left-0 right-0">
-          <PlaceCard
-         
-          item={selectedData}
-        />
+        <View className="absolute top-20 left-0 right-0">
+          <PlaceCard item={selectedData} />
         </View>
       )}
     </>

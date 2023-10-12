@@ -46,6 +46,7 @@ export default {
           tourism: "Tourism",
           natural: "Natural",
           official: "Official",
+          municipality: "Municipality",
         },
         sites_cards: {
           popular: "Popular Destination",
@@ -54,6 +55,7 @@ export default {
           tourism: "Tourism Destination",
           natural: "Natural Destination",
           official: "Official Destination",
+          municipality: "Municipality",
         },
         sites_buttons: {
           btn: "See All Places",

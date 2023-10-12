@@ -94,8 +94,8 @@ const Carousel = ({ data, autoPlay, pagination }) => {
               <Animated.View style={[styles.imageContainer, style]}>
                 <ExpoFastImage
                   style={styles.image}
-                  uri={`http://103.140.1.252/v1/places/image/${item.images[0]}`}
-                    //  uri ={ `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`}
+                  // uri={`http://103.140.1.252/v1/places/image/${item.images[0]}`}
+                     uri ={ `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`}
                   cacheKey={item._id}
                 />
                 <View className="h-fit  mb-6 w-full flex justify-center">

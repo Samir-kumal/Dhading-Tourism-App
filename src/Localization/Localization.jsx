@@ -11,8 +11,12 @@
   import { icons } from "../constants";
   import "../translation";
   import i18n from "../translation";
+  import { FontAwesome } from '@expo/vector-icons'; 
+  import Colors from "../constants/themes";
   import { useTranslation } from "react-i18next";
+  import { DataProvider } from "../context/DataProvider";
   const Localization = ({ langModal, setLangModal, setTitle}) => {
+    const {handlechange} = DataProvider();
     const [language, setLanguage] = React.useState(() => {
       if (i18n.language === "eng") {
         return [
@@ -26,6 +30,7 @@
         ];
       }
     });
+    
 
     const onSelect = (index) => {
       const temp = language;
@@ -73,11 +78,7 @@
                           }  h-14 my-3 flex-row  rounded-md items-center justify-between`}
                           onPress={() => {
                             onSelect(index);
-                            if(i18n.language === "nep"){
-                              i18n.changeLanguage("eng");
-                            } else {
-                              i18n.changeLanguage("nep")
-                            }
+                            
                           
                           }}
                         >
@@ -87,15 +88,15 @@
                               className="pr-5"
                               onPress={() => {
                                 onSelect(index);
-                                
+                                handlechange(item.name.slice(0, 3).toLowerCase());
                               
                               }}
                             >
-                              <Svg.SvgXml xml={icons.selected} />
+                              <FontAwesome name="dot-circle-o" size={24} color={Colors.DarkGreen} />
                             </Pressable>
                           ) : (
                             <Pressable className="pr-5">
-                              <Svg.SvgXml xml={icons.select} />
+                             <FontAwesome name="circle-thin" size={24} color={Colors.DarkGreen}/>
                             </Pressable>
                           )}
                         </TouchableOpacity>

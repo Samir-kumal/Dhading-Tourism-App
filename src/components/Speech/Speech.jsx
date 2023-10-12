@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, Platform } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5,AntDesign } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
 import { usePathname } from "expo-router";
 
@@ -50,14 +50,15 @@ const TextToSpeechButton = ({ text }) => {
 
   return (
     <Pressable
-      className="h-10 w-10 bg-[#f2f2f2] shadow-lg  flex rounded-full justify-center items-center"
+      className="h-10 w-10 bg-white shadow-lg  flex rounded-full justify-center items-center"
       onPress={speak}
     >
-      <FontAwesome5
+      {/* <FontAwesome5
         name={isPlaying ? "pause" : "play"}
         size={19}
         color="black"
-      />
+      /> */}
+        <AntDesign name={isPlaying ? "pausecircleo": 'playcircleo'} size={20} color="black" />
     </Pressable>
   );
 };

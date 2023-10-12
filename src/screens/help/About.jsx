@@ -37,7 +37,7 @@ export default function About() {
         <Text
           className="text-xl text-white"
           onPress={() => {
-            Linking.openURL("https://panautimun.gov.np/");
+            Linking.openURL("https://jwalamukhimun.gov.np/");
           }}
         >
           {t("about.button")}

@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 import * as Svg from "react-native-svg";
-import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome, MaterialIcons, Entypo } from "@expo/vector-icons";
 import { icons } from "../../constants";
 
 export default function Menu() {
@@ -88,8 +88,8 @@ export default function Menu() {
           className="  flex  py-1 px-4 rounded-xl  items-center justify-center"
           onPress={() => router.push("/thingstodo")}
         >
-          <MaterialIcons
-            name="work-outline"
+          <Entypo
+            name="suitcase"
             size={26}
             color={path === "/thingstodo" ? "#fff" : "black"}
           />

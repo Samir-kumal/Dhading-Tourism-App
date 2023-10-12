@@ -42,6 +42,9 @@ const PlacesDetails = () => {
     wardno,
     images,
   } = useLocalSearchParams();
+  const delimiter = ",";
+
+  const coordinatesArray = coordinates.split(delimiter);
   const [isLoading, setIsLoading] = useState(true);
   const height = Dimensions.get("window").height * 0.8;
   const [rating, setRating] = useState(0); // Initial rating is 0, you can set your default rating here
@@ -112,7 +115,7 @@ const PlacesDetails = () => {
 
             <Pressable
               onPress={() => router.back()}
-              className="h-12 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-8 z-20  flex items-center justify-center"
+              className="h-10 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-8 z-20  flex items-center justify-center"
             >
               <Ionicons
                 name="arrow-back-circle-outline"
@@ -124,9 +127,10 @@ const PlacesDetails = () => {
 
             <Animated.Image
               resizeMode="cover"
-              className=" h-[45vh]  "
+              className=" h-[40vh]  "
               source={{
-                uri: `http://103.140.1.252/v1/places/image/${image.url}`,
+                // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
+                uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
               }}
               style={{
                 transform: [
@@ -195,8 +199,8 @@ const PlacesDetails = () => {
                         className="rounded-lg"
                         style={{ width: "100%", height: "100%" }}
                         source={{
-                          // uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
-                          uri: `http://103.140.1.252/v1/places/image/${item}`,
+                          uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
+                          // uri: `http://103.140.1.252/v1/places/image/${item}`,
                         }}
                       />
                     </TouchableOpacity>
@@ -206,7 +210,7 @@ const PlacesDetails = () => {
               {/* Bottom Section */}
               <View className="flex flex-row items-center justify-between mx-4 mt-6">
                 <View className="w-60">
-                <Text style={styles.header}>Name: {title} </Text>
+                  <Text style={styles.header}>Name: {title} </Text>
 
                   <Text style={styles.location}>Location: {location} </Text>
                   <View className="flex flex-row">
@@ -222,14 +226,14 @@ const PlacesDetails = () => {
                   <FontAwesome name="star" size={24} color="#FF5733" />
                   <View>
                     <Text>Rating</Text>
-                    <Text className="text-xs ">3.5k</Text>
+                    <Text className="text-xs ">{totalRating}</Text>
                   </View>
                 </View>
               </View>
 
               {/* Map and Rating and audio */}
               <View className="mx-4">
-                <PlaceDetailComponent />
+                <PlaceDetailComponent description = {description} coordinates = {coordinatesArray} />
               </View>
               {/* Description */}
               <View className="mx-4 mt-8 h-fit flex items-end justify-end bg-slate-100 relative">
@@ -241,22 +245,23 @@ const PlacesDetails = () => {
                   className="text-justify "
                 >
                   {description}
-                  
                 </Text>
-                <TouchableOpacity className = " p-1 bg-primary w-36 m-2 rounded-md"
-                 onPress={() => setShow(true)}>
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        fontWeight: "500",
-                        color:"white"
-                      }}
-                      className="text-green-600"
-                    >
-                      {" "}
-                      Read More...
-                    </Text>
-                  </TouchableOpacity>
+                <TouchableOpacity
+                  className=" p-1 bg-primary w-36 m-2 rounded-md"
+                  onPress={() => setShow(true)}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontWeight: "500",
+                      color: "white",
+                    }}
+                    className="text-green-600"
+                  >
+                    {" "}
+                    Read More...
+                  </Text>
+                </TouchableOpacity>
               </View>
               <Modal
                 visible={modalVisible}
@@ -278,8 +283,8 @@ const PlacesDetails = () => {
                   </TouchableOpacity>
                   <Image
                     source={{
-                      // uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
-                      uri: `http://103.140.1.252/v1/places/image/${image.url}`,
+                      uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
+                      // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
                     }}
                     style={{
                       width: "100%",
@@ -316,11 +321,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
   },
-  location:{
+  location: {
     fontSize: 18,
     fontWeight: "bold",
     color: "black",
-    opacity:0.7
+    opacity: 0.7,
   },
   subheader: {
     fontSize: 18,
