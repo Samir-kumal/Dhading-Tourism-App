@@ -31,18 +31,8 @@ const RootLayout = () => {
                     headerShown: false,
                   }}
                 />
-                <Stack.Screen
-                  name="(auth)/phone"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="(auth)/otp"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                
+                
                 <Stack.Screen
                   name="(auth)/forgot"
                   options={{
@@ -56,12 +46,7 @@ const RootLayout = () => {
                     headerShown: false,
                   }}
                 />
-                <Stack.Screen
-                  name="(auth)/password-reset"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                
 
                 <Stack.Screen
                   name="(tabs)"
@@ -141,7 +126,8 @@ const RootLayout = () => {
                    <Stack.Screen
                   name="(places)/sights"
                   options={{
-                    headerTitle: "All Places",
+                    headerTitle: "",
+                    headerShown:false
                   }}
                 />
       

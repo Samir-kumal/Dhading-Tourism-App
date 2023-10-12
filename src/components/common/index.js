@@ -1,6 +1,5 @@
 import Button from "../common/Button";
 import ContentLayout from "./ContentLayout";
-import Emergency from "./Emergency";
 import ItemBtns from "./ItemBtns";
 import MainContainer from "./MainContainer";
 import PackagesCard from "./PackagesCard";
@@ -13,7 +12,6 @@ import Card from "./Card";
 export {
   Button,
   ContentLayout,
-  Emergency,
   ItemBtns,
   MainContainer,
   PackagesCard,

@@ -60,6 +60,7 @@ const Card = (props) => {
           router.push({
             pathname: "(places)/detail",
             params: {
+              placeId:item._id,
               title: item.title,
               placeId: item._id,
               description: item.description,

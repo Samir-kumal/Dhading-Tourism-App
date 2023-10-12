@@ -1,29 +1,46 @@
 import React, { useContext, useEffect, useState } from "react";
 import Maps from "../components/Map/Maps";
 import { DataContext } from "../context/DataProvider";
-import { Platform } from "react-native";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, useColorScheme } from "react-native";
 import { useRouter } from "expo-router";
-import * as Svg from "react-native-svg";
-import { icons } from "../constants";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons, FontAwesome,AntDesign } from "@expo/vector-icons";
 import Menu from "./nav/Menu";
+import { useInternet } from "../context/Internet";
+import NoInternetController from "../components/common/NoInternet.controller";
+import { StatusBar } from "expo-status-bar";
 const Location = () => {
-  const { datas } = useContext(DataContext);
+  const colorScheme = useColorScheme()
+  const { datas } = useContext(DataContext); 
   const router = useRouter();
+  const internet = useInternet()
+  const [isConnected, setIsConnected] = useState(internet.status)
+  useEffect(()=>{
+    
+      setIsConnected(internet.status);
+    
+  },[internet.status])
 
 
   return (
     <>
-      <Maps data={datas} />
+     {
+      !isConnected ? (
+        <NoInternetController/>
+      ):(
+        <>
+           <StatusBar style={colorScheme === 'dark' ? 'light-content' : 'dark'}  backgroundColor="transparent"/>
+   
+         <Maps data={datas} />
     
-        <Pressable
-          onPress={() => router.push("/home")}
-          className="h-10 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-10 z-20  flex items-center justify-center"
-        >
-          <Ionicons name="arrow-back-circle-outline" size={28} color="black" />
-          <Text className = "text-md font-bold">Back</Text>
-        </Pressable>
+    <Pressable
+      onPress={() => router.back()}
+      className=" w-fit p-2 bg-secondary shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-10 z-20  flex items-center justify-center"
+    >
+      <AntDesign name="arrowleft" size={24} color="black" />
+    </Pressable>
+        </>
+      )
+     }
   
       <Menu />
     </>

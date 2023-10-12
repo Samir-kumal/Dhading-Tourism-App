@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
-import { BackHandler, Image, View, Platform, StyleSheet } from "react-native";
+import { BackHandler, Image, View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import Loading from "../status/Loading";
-import { images } from "../../constants";
 import { PlaceCardPanauti, PlaceCard } from "../common";
 import {
   MaterialCommunityIcons,
@@ -126,7 +125,6 @@ const Maps = ({ data }) => {
 
   const handleMarkerPress = (marker) => {
     setShowContainer(true);
-    console.log(showContainer);
     setSelectedData(marker);
   };
 
@@ -147,7 +145,6 @@ const Maps = ({ data }) => {
     setVisibleMarkers(markersToDisplay);
   };
 
-  console.log("visible markers", visibleMarkers[0].category);
 
   return (
     <>
