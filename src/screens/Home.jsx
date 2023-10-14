@@ -23,6 +23,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { usePathname } from "expo-router";
 import HomeGridComponent from "../components/Home/HomeComponent";
 import NoInternetController from "../components/common/NoInternet.controller";
+import VideoContainer from "../containers/Home/Video.Container";
 const Home = React.memo(() => {
   const [show, setShow] = React.useState(false);
   const { refetch, fetchNextPage } = useDataProvider();
@@ -154,6 +155,7 @@ const Home = React.memo(() => {
                 linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
               />
             )}
+            <VideoContainer/>
           </ScrollView>
 
           <Sheet show={show} setShow={setShow} />

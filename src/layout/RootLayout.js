@@ -80,37 +80,8 @@ const RootLayout = () => {
                     headerTitle: "About",
                   }}
                 />
-                <Stack.Screen
-                  name="(places)/packages"
-                  options={{
-                    headerTitle: "Packages",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/package_detail"
-                  options={{
-                    headerTitle: "Package_detail",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/all_other_places_list"
-                  options={{
-                    headerTitle: "Places",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/all_popular_places_list"
-                  options={{
-                    headerTitle: "Places",
-                    headerShadowVisible: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="(transport)/transport"
-                  options={{
-                    headerTitle: "Routes",
-                  }}
-                />
+               
+                
                    <Stack.Screen
                   name="(places)/nearby_places"
                   options={{
