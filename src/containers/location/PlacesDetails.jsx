@@ -27,7 +27,7 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { icons } from "../../constants";
 import { FontAwesome, AntDesign, Entypo } from "@expo/vector-icons";
 import PlaceDetailComponent from "../../components/places/placesDetail/PlaceDetailComponent";
-
+import limitWords from "../../helpers/WordSlice";
 import Colors from "../../constants/themes";
 const IMAGE_SCALE_MAX = 100;
 const LABEL_HEADER_MARGIN = 100;
@@ -233,7 +233,10 @@ const PlacesDetails = () => {
 
               {/* Map and Rating and audio */}
               <View className="mx-4">
-                <PlaceDetailComponent description = {description} coordinates = {coordinatesArray} />
+                <PlaceDetailComponent
+                  description={description}
+                  coordinates={coordinatesArray}
+                />
               </View>
               {/* Description */}
               <View className="mx-4 mt-8 h-fit flex items-end justify-end bg-slate-100 relative">
@@ -244,7 +247,7 @@ const PlacesDetails = () => {
                   }}
                   className="text-justify "
                 >
-                  {description}
+                  {limitWords(description, 20)}
                 </Text>
                 <TouchableOpacity
                   className=" p-1 bg-primary w-36 m-2 rounded-md"
