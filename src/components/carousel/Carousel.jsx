@@ -7,8 +7,7 @@ import Animated, {
   interpolate,
   useAnimatedRef,
 } from "react-native-reanimated";
-import Pagination from "./Pagination";
-import ExpoFastImage from "expo-fast-image";
+
 import { imageData as data } from "../../api/data";
 const Carousel = ({ autoPlay, pagination }) => {
   const scrollViewRef = useAnimatedRef(null);
@@ -54,7 +53,7 @@ const Carousel = ({ autoPlay, pagination }) => {
   }, [isAutoPlay, data.length, offSet.value, scrollViewRef, SIZE]);
 
   return (
-    <View className="pt-1">
+    <View className="">
       <Animated.ScrollView
         ref={scrollViewRef}
         onScroll={onScroll}
@@ -110,12 +109,18 @@ export default Carousel;
 
 const styles = StyleSheet.create({
   imageContainer: {
-    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     overflow: "hidden",
   },
   image: {
     width: "100%",
-    height: 300,
-    borderRadius: 10,
+    height: 280,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
 });

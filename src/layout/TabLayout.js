@@ -21,7 +21,7 @@ const TabsLayout = () => {
       <Tabs.Screen name="likes" 
       options={{
         title: "Home",
-        headerShown: true,
+        headerShown: false,
         headerTitleStyle: {
           color: "#000",
           fontSize: 25,

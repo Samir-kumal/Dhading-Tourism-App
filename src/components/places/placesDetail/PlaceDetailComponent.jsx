@@ -13,7 +13,7 @@ const PlaceDetailStarRating = () => {
 //   export  PlaceDetailComponent;
 
 
-const PlaceDetailComponent = ({coordinates, description}) => {
+const PlaceDetailComponent = ({coordinates, description, ratingModal, setRatingModal}) => {
   // const formattedTitle = encodeURIComponent(title);
   const [latitude,longitude] = coordinates
   const openMap = () => {
@@ -37,7 +37,9 @@ const PlaceDetailComponent = ({coordinates, description}) => {
           </View>
         </TouchableOpacity>
         {/* Section 2 */}
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}
+        onPress={()=>setRatingModal(!ratingModal)} 
+        >
           <View className="p-2 bg-white rounded-full shadow-2xl">
             <FontAwesome name="star" size={20} color="#FF5733" />
           </View>
@@ -45,7 +47,7 @@ const PlaceDetailComponent = ({coordinates, description}) => {
             <Text style= {styles.texthead}>Rating</Text>
             <Text style = {styles.textsubhead}>Rate The Place</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         {/* Section 3 */}
         <View style={styles.container}>
           <View className=" bg-white rounded-full shadow-2xl">

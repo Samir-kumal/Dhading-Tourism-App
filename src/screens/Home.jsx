@@ -9,12 +9,10 @@ import {
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import { Carousel } from "../components";
 import ButtonsContainer from "../containers/Home/ButtonContainers";
-import Weather from "../containers/weather";
 import { StatusBar } from "expo-status-bar";
 import { useDataProvider } from "../context/DataProvider";
 import { InternetContext } from "../context/Internet";
 import {
-  Emergency,
   MainContainer,
   ContentLayout,
   PlaceCard,
@@ -24,9 +22,9 @@ import { useTranslation } from "react-i18next";
 import { MaterialIcons } from "@expo/vector-icons";
 import { usePathname } from "expo-router";
 import HomeGridComponent from "../components/Home/HomeComponent";
-import { use } from "i18next";
+import NoInternetController from "../components/common/NoInternet.controller";
+import VideoContainer from "../containers/Home/Video.Container";
 const Home = React.memo(() => {
-  const colorScheme = useColorScheme();
   const [show, setShow] = React.useState(false);
   const { refetch, fetchNextPage } = useDataProvider();
   const { datas } = useDataProvider();
@@ -79,20 +77,24 @@ const Home = React.memo(() => {
 
   const MemoizedButtonsContainer = useMemo(() => <ButtonsContainer />, []);
 
+  const colorScheme = useColorScheme();
+
+  
+
   return (
     <>
+    
       {!isConnected ? (
         <>
           <StatusBar
             style={colorScheme === "dark" ? "light-content" : "dark-content"}
           />
-          <Emergency />
+          <NoInternetController />
         </>
       ) : (
         <MainContainer>
-          <StatusBar
-            style={colorScheme === "dark" ? "light-content" : "dark-content"}
-          />
+      <StatusBar style={colorScheme === 'dark' ? 'light-content' : 'dark'}  backgroundColor="transparent"/>
+          
           <ScrollView
             className="mb-16 relative "
             showsVerticalScrollIndicator={false}
@@ -132,14 +134,14 @@ const Home = React.memo(() => {
             </View>
             <View className=" h-14 items-center justify-center">
               <HomeGridComponent />
-              
+
             </View>
 
             {isFocused && filteredData.length >0 ? (
-              
+
               filteredData.map((item,index) => (
                 <>
-                <PlaceCard key={index} item={item} />
+                <PlaceCard key={item.slug_name} item={item} />
 
                 </>
               ))
@@ -153,12 +155,14 @@ const Home = React.memo(() => {
                 linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
               />
             )}
+            <VideoContainer/>
           </ScrollView>
 
           <Sheet show={show} setShow={setShow} />
+      <Menu />
+
         </MainContainer>
       )}
-          <Menu />
 
     </>
   );

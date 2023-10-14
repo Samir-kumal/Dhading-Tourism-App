@@ -32,7 +32,6 @@ import Logo from "../../components/common/Logo";
 WebBrowser.maybeCompleteAuthSession();
 
 const Signin = () => {
-  console.log("check point -2: signin screen");
   useBackButtonExit();
   const { signIn } = useAuth();
   const { t } = useTranslation();
@@ -56,7 +55,6 @@ const Signin = () => {
       .then(async (response) => {
         setError(false);
         const userObj = await getUser(response.data.token);
-        console.log(userObj, "from sign in screen");
         signIn(userObj);
         setIsLoading(false);
       })
@@ -78,10 +76,8 @@ const Signin = () => {
 
   return (
     <>
-      <SafeAreaView className="bg-secondary flex-1 h-full">
-        <StatusBar
-          style={colorScheme === "dark" ? "light-content" : "dark-content"}
-        />
+      <SafeAreaView className="bg-cardColor flex-1 h-full">
+        
         <View className="z-10  h-0">
           <CircleWrapper />
         </View>
@@ -96,7 +92,7 @@ const Signin = () => {
           </Text>
         </View>
         <View className="flex flex-col items-center justify-center">
-          <Logo source="signin" size={180} />
+          <Logo source="signin" size={130} />
         </View>
 
         {/* sign up container */}
@@ -179,7 +175,7 @@ const Signin = () => {
         </View>
 
         <View className="flex justify-center mt-2  flex-row">
-          <GoogleBtn />
+          {/* <GoogleBtn /> */}
           <GuestLogin status={internet.status} text={t("signinPage.guest")} />
         </View>
         <View className="flex items-center mt-0 translate-y-5 mx-4">

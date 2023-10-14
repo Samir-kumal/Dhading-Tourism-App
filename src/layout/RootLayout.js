@@ -31,18 +31,8 @@ const RootLayout = () => {
                     headerShown: false,
                   }}
                 />
-                <Stack.Screen
-                  name="(auth)/phone"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="(auth)/otp"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                
+                
                 <Stack.Screen
                   name="(auth)/forgot"
                   options={{
@@ -56,12 +46,7 @@ const RootLayout = () => {
                     headerShown: false,
                   }}
                 />
-                <Stack.Screen
-                  name="(auth)/password-reset"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                
 
                 <Stack.Screen
                   name="(tabs)"
@@ -95,37 +80,8 @@ const RootLayout = () => {
                     headerTitle: "About",
                   }}
                 />
-                <Stack.Screen
-                  name="(places)/packages"
-                  options={{
-                    headerTitle: "Packages",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/package_detail"
-                  options={{
-                    headerTitle: "Package_detail",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/all_other_places_list"
-                  options={{
-                    headerTitle: "Places",
-                  }}
-                />
-                <Stack.Screen
-                  name="(places)/all_popular_places_list"
-                  options={{
-                    headerTitle: "Places",
-                    headerShadowVisible: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="(transport)/transport"
-                  options={{
-                    headerTitle: "Routes",
-                  }}
-                />
+               
+                
                    <Stack.Screen
                   name="(places)/nearby_places"
                   options={{
@@ -141,7 +97,8 @@ const RootLayout = () => {
                    <Stack.Screen
                   name="(places)/sights"
                   options={{
-                    headerTitle: "All Places",
+                    headerTitle: "",
+                    headerShown:false
                   }}
                 />
       

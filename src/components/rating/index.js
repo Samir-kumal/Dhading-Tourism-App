@@ -4,11 +4,11 @@ import axios from "axios";
 import Toast from "react-native-root-toast";
 
 import Icon from "react-native-vector-icons/FontAwesome";
+import { theme } from "../../constants";
 
-const Rating = ({ maxStars, rating, placeId, onStarPress }) => {
+const Rating = ({ maxStars, rating, placeId, onStarPress,setRatingModal,ratingModal }) => {
   const submitRating = async (placeId, starNumber) => {
-    console.log(starNumber, "from the axios");
-    const url = `http://103.140.1.252/v1/places/${placeId}/rate`;
+    const url = `http://prayatan.jwalamukhimun.gov.np/v1/places/${placeId}/rate`;
 
     try {
       const response = await axios.post(url, { rating: starNumber });
@@ -17,11 +17,17 @@ const Rating = ({ maxStars, rating, placeId, onStarPress }) => {
         let toast = Toast.show("Place rated successfully.", {
           duration: Toast.durations.LONG,
         });
+        setRatingModal(!ratingModal)
+        
       } else {
-        console.log("Failed to update place rating.");
+         Toast.show("Failed to Rate the place.", {
+          duration: Toast.durations.SHORT,
+        });
       }
     } catch (error) {
-      console.error("Error rating place:", error);
+      Toast.show("Error rating place", {
+        duration: Toast.durations.SHORT,
+      });
     }
   };
   const renderStar = (starNumber) => {
@@ -32,8 +38,6 @@ const Rating = ({ maxStars, rating, placeId, onStarPress }) => {
         key={starNumber}
         onPress={async () => {
           onStarPress(starNumber);
-          console.log(starNumber, "star");
-          console.log(placeId, "toplace");
           await new Promise((resolve) => setTimeout(resolve, 1000));
           await submitRating(placeId, starNumber);
         }}
@@ -41,7 +45,7 @@ const Rating = ({ maxStars, rating, placeId, onStarPress }) => {
         <Icon
           name={filled ? "star" : "star-o"}
           size={35}
-          color={filled ? "#8062F8" : "black"}
+          color={filled ? theme.primary : "black"} 
         />
       </TouchableOpacity>
     );

@@ -7,7 +7,6 @@ import {
   ScrollView,
   TouchableOpacity,
   SectionList,
-  SafeAreaView,
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
@@ -16,9 +15,11 @@ import { Feather } from "@expo/vector-icons";
 import { useDataProvider } from "../../context/DataProvider";
 import CircleWrapper from "../../components/common/CircleWrapper";
 import PlaceCard from "../../components/common/PlaceCard";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import Colors from "../../constants/themes";
 import { FlashList } from "@shopify/flash-list";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -48,7 +49,7 @@ const SightsContainer = () => {
   const [filteredData, setFilteredData] = useState(datas);
   const [inputData, setInputData] = React.useState("");
 
-  
+  const router = useRouter()
 
   const handleFilter = (text) => {
     const filteredItems = datas.filter((item) =>
@@ -93,7 +94,7 @@ const SightsContainer = () => {
     setOrganizedData(data);
   }, [filteredData]);
 
-  
+
 
   // scroll to the selected category
   useEffect(() => {
@@ -146,26 +147,33 @@ const SightsContainer = () => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: Colors.theme }}>
-      <View style={{ height: height / 10 }}>
+    <SafeAreaView style={{ backgroundColor: Colors.theme, position:"relative" }}>
+      <StatusBar backgroundColor="transparent"/>
+      <View style={{ height: height / 10, position:"absolute" }}>
         <CircleWrapper />
       </View>
-      <View>
-        <View className="relative">
-          <View className="absolute z-10 top-10 right-8">
-            <Feather name="search" size={24} color="#999" />
+      <View className="">
+        <View className="relative  flex flex-row p-2 items-center justify-around gap-x-4">
+          <View className="w-10 h-10 rounded-full flex items-center justify-center ">
+            <TouchableOpacity onPress={() => router.back()}>
+              <Feather name="arrow-left" size={24} color="#000" />
+
+            </TouchableOpacity>
           </View>
-          <TextInput
-            value={inputData}
-            onChangeText={(text) => {
-              setInputData(text);
-              handleFilter(text);
-            }}
-            placeholder="Search Destination"
-            className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
-          />
+          <View className=" flex flex-row items-center justify-center border border-y-primary  bg-white py-3 rounded-lg ">
+            <Feather name="search" size={24} color="#999" />
+            <TextInput
+              value={inputData}
+              onChangeText={(text) => {
+                setInputData(text);
+                handleFilter(text);
+              }}
+              placeholder="Search Destination"
+              className="w-[80%] pl-2"
+            />
+          </View>
         </View>
-        <View className="my-4">
+        <View className="my-1">
           <FlatList
             className=""
             data={categoryItems}
@@ -204,16 +212,17 @@ const SightsContainer = () => {
           {!isLoading ? (
             organizedData.map((categoryData, index) => (
               <View
-                style={{ width, height, backgroundColor: "#fff" }}
+                style={{ width, height }}
                 key={index}
+                className=""
               >
-                <View className=" px-4 py-6 w-full ">
+                <View className=" px-4 py-3 w-full ">
                   <Text className="text-xl font-bold">
                     {categoryData.category} Destination
                   </Text>
                 </View>
                 <FlashList
-                className = 'mb-12'
+                  className="mb-52"
                   data={categoryData.data}
                   estimatedItemSize={240}
                   keyExtractor={(item) => item._id}

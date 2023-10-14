@@ -15,7 +15,6 @@ import {
   Modal,
 } from "react-native";
 import React, { useRef, useMemo, useState, useEffect } from "react";
-import StarRating from "../../components/common/StarRating";
 import { useLocalSearchParams } from "expo-router";
 import InnerMaps from "../../components/Map/InnerMap";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet/";
@@ -27,13 +26,14 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { icons } from "../../constants";
 import { FontAwesome, AntDesign, Entypo } from "@expo/vector-icons";
 import PlaceDetailComponent from "../../components/places/placesDetail/PlaceDetailComponent";
-import limitWords from "../../helpers/WordSlice";
+import { Rating } from "../../components";
 import Colors from "../../constants/themes";
 const IMAGE_SCALE_MAX = 100;
 const LABEL_HEADER_MARGIN = 100;
 
 const PlacesDetails = () => {
   const {
+    placeId,
     title,
     totalRating,
     description,
@@ -48,7 +48,7 @@ const PlacesDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const height = Dimensions.get("window").height * 0.8;
   const [rating, setRating] = useState(0); // Initial rating is 0, you can set your default rating here
-  const [showBtn, setShowBtn] = useState(false);
+  const [ratingModal, setRatingModal] = useState(false);
   const parseUrl = JSON.parse(images);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -58,8 +58,10 @@ const PlacesDetails = () => {
   const [imageArray, setImageArray] = useState(parseUrl);
 
   const handleClick = () => {
-    console.log("clicked");
     setModalVisible(true);
+  };
+  const handleStarPress = (selectedRating) => {
+    setRating(selectedRating);
   };
 
   const bottomSheetRef = useRef(null);
@@ -129,7 +131,6 @@ const PlacesDetails = () => {
               resizeMode="cover"
               className=" h-[40vh]  "
               source={{
-                // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
                 uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
               }}
               style={{
@@ -171,7 +172,6 @@ const PlacesDetails = () => {
               >
                 <AntDesign name="arrowsalt" size={24} color="white" />
               </Pressable>
-              {/* Carousel Thumbnails */}
               <View className="m-2 mt-4">
                 <FlatList
                   data={imageArray}
@@ -183,15 +183,11 @@ const PlacesDetails = () => {
                     <TouchableOpacity
                       onPress={() => {
                         setImage({
-                          // uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`
                           url: item,
                         });
-                        console.log(image.url);
                       }}
                       className={
-                        // item.urls.regular === image.url
-                        //   ? "w-20 h-14 bg-slate-300 border-4 border-white shadow-xl rounded-xl mx-2"
-                        //   :
+                        
                         "w-14 h-12 bg-slate-300 rounded-xl mx-2"
                       }
                     >
@@ -200,7 +196,6 @@ const PlacesDetails = () => {
                         style={{ width: "100%", height: "100%" }}
                         source={{
                           uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
-                          // uri: `http://103.140.1.252/v1/places/image/${item}`,
                         }}
                       />
                     </TouchableOpacity>
@@ -213,7 +208,7 @@ const PlacesDetails = () => {
                   <Text style={styles.header}>Name: {title} </Text>
 
                   <Text style={styles.location}>Location: {location} </Text>
-                  <View className="flex flex-row">
+                  <View className="flex flex-row items-center ">
                     <MaterialIcons
                       name="location-pin"
                       size={28}
@@ -233,10 +228,7 @@ const PlacesDetails = () => {
 
               {/* Map and Rating and audio */}
               <View className="mx-4">
-                <PlaceDetailComponent
-                  description={description}
-                  coordinates={coordinatesArray}
-                />
+                <PlaceDetailComponent description = {description} setRatingModal={setRatingModal} ratingModal={ratingModal} coordinates = {coordinatesArray} />
               </View>
               {/* Description */}
               <View className="mx-4 mt-8 h-fit flex items-end justify-end bg-slate-100 relative">
@@ -247,15 +239,15 @@ const PlacesDetails = () => {
                   }}
                   className="text-justify "
                 >
-                  {limitWords(description, 20)}
+                  {description.substring(0,150) + ". . ."}
                 </Text>
                 <TouchableOpacity
-                  className=" p-1 bg-primary w-36 m-2 rounded-md"
+                  className=" py-3 bg-primary px-5 m-2 rounded-md"
                   onPress={() => setShow(true)}
                 >
                   <Text
                     style={{
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: "500",
                       color: "white",
                     }}
@@ -266,6 +258,8 @@ const PlacesDetails = () => {
                   </Text>
                 </TouchableOpacity>
               </View>
+
+              
               <Modal
                 visible={modalVisible}
                 animationType="fade"
@@ -299,6 +293,43 @@ const PlacesDetails = () => {
               </Modal>
             </Animated.View>
           </ScrollView>
+          {/* ///////for rating */}
+          <Modal
+                visible={ratingModal}
+                animationType="fade"
+                onRequestClose={() => setRatingModal(false)}
+                hardwareBackButton={true}
+                supportedOrientations={["portrait", "landscape"]}
+                transparent={
+                  true
+                }
+                
+              >
+                <View className="flex mt-2 w-full pb-3 items-center justify-center h-screen " style={styles.semiTransparentBlack}>
+                  <View className=" bg-cardColor p-7 rounded-md">
+                   
+                  <Text className="pl-3 mt-1 text-lg font-bold">
+                    Rate this Place
+                  </Text>
+                  <Text className="pl-3  text-md">
+                    Tell others what you think
+                  </Text>
+                  <View className="flex items-center justify-center mt-3">
+                    <Rating
+                      maxStars={5}
+                      rating={rating}
+                      placeId={placeId}
+                      onStarPress={handleStarPress}
+                      setRatingModal={setRatingModal}
+                      ratingModal={ratingModal}
+                    />
+                  </View>
+                  </View>
+                </View>
+                 
+              </Modal>
+
+              {/* ///rating modal */}
           {show && (
             <BottomSheet
               ref={bottomSheetRef}
@@ -335,4 +366,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "grey",
   },
+    semiTransparentBlack: {
+      backgroundColor: 'rgba(0, 0, 0, 0.09)',
+    },
 });
