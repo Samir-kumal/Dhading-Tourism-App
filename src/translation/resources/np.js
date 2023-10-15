@@ -30,14 +30,16 @@ export default {
     },
   },
   homepage: {
+   
     firstpage: {
+      heading: "ज्वालामुखी नगरपालिकामा स्वागत छ",
       title_cards: {
         gallery: "ग्यालरी",
         nearby: "नजिकका स्थलहरू",
         sights: "दृश्य",
-        all_places: "सबै स्थलहरू",
-        transport: "यातायात/मार्गहरू",
+
       },
+      text_input:"गन्तव्य खोज्नुहोस्",
       sites: {
         sites_category: {
           popular: "प्रसिद्ध",
@@ -46,6 +48,8 @@ export default {
           tourism: "पर्यटन",
           natural: "प्राकृतिक",
           official: "आधिकारिक",
+          municipality: "नगरपालिका",
+
         },
         sites_cards: {
           popular: "प्रसिद्ध स्थलहरू",

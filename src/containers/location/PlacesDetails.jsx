@@ -19,7 +19,6 @@ import { useLocalSearchParams } from "expo-router";
 import InnerMaps from "../../components/Map/InnerMap";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet/";
 import { StatusBar } from "expo-status-bar";
-import ItemBtns from "../../components/common/ItemBtns";
 import { useRouter } from "expo-router";
 import * as Svg from "react-native-svg";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";

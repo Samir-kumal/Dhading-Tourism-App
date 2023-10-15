@@ -8,7 +8,7 @@ import MainContainer from "../../components/common/MainContainer";
 
 export default function Support() {
   const phoneNumber = "+977-9812345678";
-  const email = "info@panautimun.gov.np";
+  const email = "info@jwalamukhimun.gov.np";
 
   return (
     <MainContainer>
@@ -44,7 +44,7 @@ export default function Support() {
             <Svg.SvgXml xml={icons.email} />
           </View>
           <View style={styles.textHolder}>
-            <Text>info@panautimun.gov.np</Text>
+            <Text>info@jwalamukhimun.gov.np</Text>
           </View>
           <View style={styles.linkHolder}>
             <Text
@@ -80,13 +80,13 @@ export default function Support() {
             <Svg.SvgXml xml={icons.globe} />
           </View>
           <View style={styles.textHolder}>
-            <Text>https://www.panautimun.gov.np/</Text>
+            <Text>https://jwalamukhimun.gov.np/</Text>
           </View>
           <View style={styles.linkHolder}>
             <Text
               style={styles.linkHolderText}
               onPress={() => {
-                Linking.openURL(`https://www.panautimun.gov.np/`);
+                Linking.openURL(`https://jwalamukhimun.gov.np/`);
               }}
             >
               Visit Website

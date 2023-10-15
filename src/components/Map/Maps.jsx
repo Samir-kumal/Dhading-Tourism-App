@@ -3,7 +3,7 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { BackHandler, Image, View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import Loading from "../status/Loading";
-import { PlaceCardPanauti, PlaceCard } from "../common";
+import { PlaceCardJwalamukhi, PlaceCard } from "../common";
 import {
   MaterialCommunityIcons,
   Foundation,
@@ -168,7 +168,7 @@ const Maps = ({ data }) => {
             style={{ zIndex: 10 }}
           >
             {showContainerMain && (
-              <PlaceCardPanauti
+              <PlaceCardJwalamukhi
                 title="Jwalamukhi"
                 description="Jwalamukhi is a Gaupalika in Dhading District in the Bagmati Zone of central Nepal. The local body was formed by merging four VDCs namely Khari, Dhola, Nepal, Maidi and Chainpur, Bagmati. Currently, it has a total of 7 wards."
               />

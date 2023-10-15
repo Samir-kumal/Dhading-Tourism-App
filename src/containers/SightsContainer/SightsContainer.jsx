@@ -231,6 +231,8 @@ const SightsContainer = () => {
                     <PlaceCard item={item} key={item._id} />
                   )}
                 />
+      <View className = "h-28 w-full bg-transparent"><Text></Text></View>
+
               </View>
             ))
           ) : (

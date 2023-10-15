@@ -19,7 +19,6 @@ import {
   import { useLocalSearchParams } from "expo-router";
   import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet/";
   import { StatusBar } from "expo-status-bar";
-  import ItemBtns from "../../components/common/ItemBtns";
   import { useRouter } from "expo-router";
   import { Ionicons, MaterialIcons } from "@expo/vector-icons";
   import { FontAwesome, AntDesign, Entypo } from "@expo/vector-icons";

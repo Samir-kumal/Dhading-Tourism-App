@@ -30,9 +30,6 @@ export default function About() {
           </Text>
         </View>
       </View>
-      <View style={styles.FullLogoWrapper}>
-        <Image style={styles.FullLogoImage} source={images.logo3} />
-      </View>
       <View className="w-full  flex items-center justify-center h-12 -translate-y-8 rounded-md bg-primary">
         <Text
           className="text-xl text-white"

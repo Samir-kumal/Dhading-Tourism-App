@@ -68,22 +68,7 @@ import { StatusBar } from "expo-status-bar";
     const [inputData, setInputData] = React.useState("");
     const [filteredData, setFilteredData] = React.useState(Data);
   
-    // const handleClick = (item) => {
-    //   router.push({
-    //     pathname: "(places)/thingstododetail",
-    //     params: {
-    //       title: item.name,
-    //       // description: item.description,
-    //       // totalRating: totalRating,
-    //       // coordinates: coordinates.coordinates,
-    //       // wardno: wardno,
-    //       // location: location,
-    //       images: item.image,
-    //       description:item.desc2,
-    //       price:item.price
-    //     },
-    //   });
-    // }
+  
     const handleFilter = (text) => {
       const filteredItems = Data.filter((item) =>
         item.name.toLowerCase().includes(text.toLowerCase())

@@ -14,12 +14,12 @@ const HeaderGallery = ({ show, setShow }) => {
       <View className=" h-16  z-10 bg-white w-full justify-center  mb-1  rounded-xl rounded-t-none  ">
         <View className="flex flex-row items-center justify-between px-5">
         <View className="  h-12  flex flex-row items-center justify-center">
-            <TouchableOpacity className="" onPress={() => setShow(!show)}>
-              <Svg.SvgXml xml={icons.menu} />
+            <TouchableOpacity className="w-4" >
+            
             </TouchableOpacity>
           </View>
           <View>
-            <Text>
+            <Text className = "font-bold text-xl">
                 Gallery
             </Text>
           </View>

@@ -1,6 +1,6 @@
 import { ScrollView, useColorScheme } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Menu, Header, Sheet } from "../screens/nav";
+import { Menu } from "../screens/nav";
 import GalleryContainer from "../containers/gallery/GalleryContainer";
 import { MainContainer, SkeletonCardGallery } from "../components/common";
 import { useDataProvider } from "../context/DataProvider";
@@ -34,7 +34,7 @@ const Gallery = () => {
         )}
       </ScrollView>
       <Menu />
-      <Sheet show={show} setShow={setShow} />
+     
     </MainContainer>
   );
 };

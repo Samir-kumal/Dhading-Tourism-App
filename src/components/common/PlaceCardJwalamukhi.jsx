@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
 import ExpoFastImage from "expo-fast-image";
 
-const PlaceCardPanauti = (props) => {
+const PlaceCardJwalamukhi = (props) => {
   const { title, description } = props;
 
   return (
@@ -34,4 +34,4 @@ const PlaceCardPanauti = (props) => {
   );
 };
 
-export default PlaceCardPanauti;
+export default PlaceCardJwalamukhi;

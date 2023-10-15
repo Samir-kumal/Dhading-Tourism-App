@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import { Carousel } from "../components";
-import ButtonsContainer from "../containers/Home/ButtonContainers";
+
 import { StatusBar } from "expo-status-bar";
 import { useDataProvider } from "../context/DataProvider";
 import { InternetContext } from "../context/Internet";
@@ -75,7 +75,7 @@ const Home = React.memo(() => {
     [datas]
   );
 
-  const MemoizedButtonsContainer = useMemo(() => <ButtonsContainer />, []);
+
 
   const colorScheme = useColorScheme();
 
@@ -106,12 +106,11 @@ const Home = React.memo(() => {
             {/* {MemoizedWeather} */}
             {MemoizedCarousel}
             <View className=" h-fit  absolute top-36 w-full">
-              <View className=" ">
+              <View className="flex flex-row flex-wrap items-center justify-center ">
                 <Text className="text-white text-center  font-bold text-3xl">
-                  Welcome to
+                  {t("homepage.firstpage.heading")}
                 </Text>
                 <Text className="text-white text-center  font-bold text-2xl">
-                  Jwalamukhi Gaupalika
                 </Text>
               </View>
               <View className="bg-transparent  w-full bottom-4 ">
@@ -126,8 +125,8 @@ const Home = React.memo(() => {
               handleFilter(text);
             } }
             onFocus={() => setIsFocused(true)}
-              placeholder="Search Destination"
-              className="bg-white py-4 rounded-lg mx-4 mt-6 px-4"
+              placeholder={t("homepage.firstpage.text_input")}
+              className="bg-white py-4 rounded-lg mx-2 mt-[24px] px-4"
             />
           </View>
               </View>
@@ -158,7 +157,7 @@ const Home = React.memo(() => {
             <VideoContainer/>
           </ScrollView>
 
-          <Sheet show={show} setShow={setShow} />
+        
       <Menu />
 
         </MainContainer>

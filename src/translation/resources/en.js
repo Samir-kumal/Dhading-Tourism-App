@@ -31,13 +31,13 @@ export default {
   },
   homepage: {
     firstpage: {
+      heading: "Welcome to Jwalamukhi Municipality",
       title_cards: {
         gallery: "Gallery",
-        nearby: "Nearby",
+        nearby: "Near by",
         sights: "Sights",
-        all_places: "All Places",
-        transport: "Transport/routes",
       },
+      text_input:"Search Destination",
       sites: {
         sites_category: {
           popular: "Popular",
@@ -84,9 +84,9 @@ export default {
   },
   gallery: {},
   about: {
-    title: "Panauti Municipality, Kavrepalanchok",
+    title: "Jwalamukhi Municipality",
     desc1:
-      "Welcome to our innovative tourism app for Panauti Municipality, where exploration meets convenience and adventure is at your fingertips. Discover new destinations, access detailed travel guides and accommodations, and explore with confidence using our interactive maps and curated itineraries.",
+      "Welcome to our innovative tourism app for Jwalamukhi Municipality, where exploration meets convenience and adventure is at your fingertips. Discover new destinations, access detailed travel guides and accommodations, and explore with confidence using our interactive maps and curated itineraries.",
     desc2:
       "Elevate your travel experience with our all-in-one app. The information contained in this app has been provided by experts while every effor have been made to ensure accuracy and reliability. However, in case of lapses and discrepancies, revision and update would be subsequently carried out in the update.",
       button:"Visit Our Website"
