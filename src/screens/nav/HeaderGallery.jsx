@@ -4,9 +4,10 @@ import * as Svg from "react-native-svg";
 import { icons, images } from "../../constants";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../context/Auth";
+import { useTranslation } from "react-i18next";
 const HeaderGallery = ({ show, setShow }) => {
   const { user } = useAuth();
-
+  const {t} = useTranslation();
   const router = useRouter();
 
   return (
@@ -20,11 +21,11 @@ const HeaderGallery = ({ show, setShow }) => {
           </View>
           <View>
             <Text className = "font-bold text-xl">
-                Gallery
+               {t("gallery.title")}
             </Text>
           </View>
           <TouchableOpacity
-            className=" w-12 h-12 rounded-full"
+            className=" w-10 h-10 rounded-full"
             onPress={() => router.push("/profile")}
           >
   

@@ -17,7 +17,7 @@ const Header = ({ show, setShow }) => {
           
           </View>
           <TouchableOpacity
-            className=" w-12 h-12 rounded-full"
+            className=" w-10 h-10 rounded-full"
             onPress={() => router.push("/profile")}
           >
   

@@ -126,7 +126,7 @@ const Home = React.memo(() => {
             } }
             onFocus={() => setIsFocused(true)}
               placeholder={t("homepage.firstpage.text_input")}
-              className="bg-white py-4 rounded-lg mx-2 mt-[24px] px-4"
+              className="bg-white py-4 rounded-lg mx-2 mt-[20px] px-4"
             />
           </View>
               </View>

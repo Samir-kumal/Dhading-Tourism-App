@@ -61,8 +61,8 @@ export const DataProvider = (props) => {
             "api-key": "3fba649578447eb76c59",
           },
         });
-        const data = response.data.places.places;
-        const Pages = response.data.places.totalCount;
+        const data = response.data.places;
+        const Pages = response.data.totalCount;
 
         setDatas(data);
         setTotalPages(Pages);

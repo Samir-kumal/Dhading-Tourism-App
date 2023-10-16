@@ -32,12 +32,17 @@ const Location = () => {
    
          <Maps data={datas} />
     
-    <Pressable
-      onPress={() => router.back()}
-      className=" w-fit p-2 bg-secondary shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-10 z-20  flex items-center justify-center"
-    >
-      <AntDesign name="arrowleft" size={24} color="black" />
-    </Pressable>
+         <Pressable
+              onPress={() => router.back()}
+              className="h-10 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-8 z-20  flex items-center justify-center"
+            >
+              <Ionicons
+                name="arrow-back-circle-outline"
+                size={32}
+                color="black"
+              />
+              <Text className="text-md font-bold">Back</Text>
+            </Pressable>
         </>
       )
      }

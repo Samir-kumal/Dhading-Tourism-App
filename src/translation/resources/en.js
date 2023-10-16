@@ -66,7 +66,18 @@ export default {
           btn5: "See All Natural Sites",
           btn6: "See All Official Sites",
         },
+       
       },
+      youtube_video_section:{
+        title:"Explore Our Videos",
+        button:"see more videos",
+      }
+    },
+    settingspage:{
+      my_details:"My Details",
+      lang_preferences:"Language Preferences",
+      abt_app:"About Our App",
+      logout:"Log Out"
     },
     bottomsheet: {
       profile: "Profile",
@@ -77,12 +88,19 @@ export default {
         msgbox: "Signing out...",
       },
     },
+   
+
   },
   savedPage: {
     title: "No wishlist items found",
     button: "Discover your places",
   },
-  gallery: {},
+  gallery: {
+    title:"Gallery"
+  },
+  thingstodo:{
+    title:"Things to do"
+  },
   about: {
     title: "Jwalamukhi Municipality",
     desc1:

@@ -20,6 +20,7 @@ import Colors from "../../constants/themes";
 import { FlashList } from "@shopify/flash-list";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import {useTranslation} from "react-i18next";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -27,6 +28,7 @@ const height = Dimensions.get("window").height;
 const SightsContainer = () => {
   const { datas } = useDataProvider();
   const scrollViewRef = useRef();
+  const { t } = useTranslation();
   // const [selectedCategory, setCategory] = useState(dataList[0].name);
   const [activeIndex, setActiveIndex] = useState(() => {
     if (categoryType) {
@@ -168,7 +170,7 @@ const SightsContainer = () => {
                 setInputData(text);
                 handleFilter(text);
               }}
-              placeholder="Search Destination"
+              placeholder={t("homepage.firstpage.text_input")}
               className="w-[80%] pl-2"
             />
           </View>

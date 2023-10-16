@@ -33,36 +33,27 @@ const ContentLayout = ({ title, data, category, linkButton }) => {
   }, [i18n.language]);
 
   const thisData =
-    category.toLowerCase() === "popular" || category === "प्रसिद्ध"
-      ? data.filter((item) =>
-          matchingSlugs[selectedLanguage].includes(item.slug_name)
-        )
-      : data.filter(
-          (item) => item.category.toLowerCase() === category.toLowerCase()
-        );
+    data &&
+    data.filter(
+      (item) => item.category.toLowerCase() === category.toLowerCase()
+    );
 
   const renderedData = useMemo(() => {
-    if (category.toLowerCase() === "official" || category === "आधिकारिक") {
-      return thisData.slice(0, 2);
-    } else {
+    if (thisData) {
       return thisData.slice(0, 4);
+    } else {
+      return [];
     }
   }, [data]);
 
   const handlePress = () => {
-    
-      router.push("/(places)/homeplacesdetails");
-    
-    
+    router.push("/(places)/homeplacesdetails");
   };
 
   return (
     <View className=" w-full  rounded-xl mt-3 ">
-      <View className = "flex flex-row items justify-between mx-4">
+      <View className="flex flex-row items justify-between mx-4">
         <Text className="font-bold text-2xl mt-4 mb-2">{title}</Text>
-        {/* <TouchableOpacity className = "flex items-center justify-center" onPress={() => router.push("/homedetail")}>
-          <Text className="font-semibold">See More</Text>
-        </TouchableOpacity> */}
       </View>
 
       <View className="imageWrapper">
