@@ -5,6 +5,7 @@ import { icons, images } from "../../constants";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../context/Auth";
 import { useTranslation } from "react-i18next";
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 const HeaderGallery = ({ show, setShow }) => {
   const { user } = useAuth();
   const {t} = useTranslation();
@@ -15,8 +16,8 @@ const HeaderGallery = ({ show, setShow }) => {
       <View className=" h-16  z-10 bg-white w-full justify-center  mb-1  rounded-xl rounded-t-none  ">
         <View className="flex flex-row items-center justify-between px-5">
         <View className="  h-12  flex flex-row items-center justify-center">
-            <TouchableOpacity className="w-4" >
-            
+            <TouchableOpacity onPress={()=>router.push("/home")} className="w-4" >
+            <FontAwesome5 name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
           </View>
           <View>

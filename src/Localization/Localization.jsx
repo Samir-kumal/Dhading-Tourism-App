@@ -16,7 +16,7 @@ import Colors from "../constants/themes";
 import { useTranslation } from "react-i18next";
 import { useDataProvider } from "../context/DataProvider";
 const Localization = ({ langModal, setLangModal, setTitle }) => {
-  const { handlechange } = useDataProvider();
+  const { handleLanguageChange } = useDataProvider();
   const [language, setLanguage] = React.useState(() => {
     if (i18n.language === "eng") {
       return [
@@ -78,8 +78,10 @@ const Localization = ({ langModal, setLangModal, setTitle }) => {
                         onPress={() => {
                           onSelect(index);
                           // change to nepali if nepali is selected
-                          i18n.changeLanguage(item.name.slice(0, 3).toLowerCase());
-
+                          i18n.changeLanguage(
+                            item.name.slice(0, 3).toLowerCase()
+                          );
+                          handleLanguageChange();
                         }}
                       >
                         <Text className="pl-4 text-xl">{item.name}</Text>
@@ -88,7 +90,7 @@ const Localization = ({ langModal, setLangModal, setTitle }) => {
                             className="pr-5"
                             onPress={() => {
                               onSelect(index);
-                              i18n.changeLanguage(item.name.slice(0, 3).toLowerCase());
+                              // i18n.changeLanguage(item.name.slice(0, 3).toLowerCase());
                             }}
                           >
                             <FontAwesome
