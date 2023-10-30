@@ -13,7 +13,7 @@ const VideoContainer = () => {
   useEffect(() => {
     setIsLoading(false);
   }, [videoData]);
-
+console.log(videoData)
   return (
     <View className=" mb-5 p-2 rounded-md">
       <View className="py-2 px-1 flex flex-row items-center justify-between">

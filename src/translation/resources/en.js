@@ -91,6 +91,9 @@ export default {
    
 
   },
+  nearby:{
+    title:"No Places Nearby !"
+  },
   savedPage: {
     title: "No wishlist items found",
     button: "Discover your places",
@@ -108,6 +111,13 @@ export default {
     desc2:
       "Elevate your travel experience with our all-in-one app. The information contained in this app has been provided by experts while every effor have been made to ensure accuracy and reliability. However, in case of lapses and discrepancies, revision and update would be subsequently carried out in the update.",
       button:"Visit Our Website"
+  },
+  details:{
+    title:"Personal Information",
+    full_name:"Full Name",
+    email:"Email",
+    phone:"Phone Number",
+  
   },
   emergency: {
     title: "No Internet Connection",

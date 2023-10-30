@@ -175,7 +175,7 @@ const Signin = () => {
         </View>
 
         <View className="flex justify-center mt-2  flex-row">
-          {/* <GoogleBtn /> */}
+          <GoogleBtn />
           <GuestLogin status={internet.status} text={t("signinPage.guest")} />
         </View>
         <View className="flex items-center mt-0 translate-y-5 mx-4">

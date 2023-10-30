@@ -6,7 +6,6 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
-  SectionList,
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
@@ -29,14 +28,13 @@ const SightsContainer = () => {
   const { datas } = useDataProvider();
   const scrollViewRef = useRef();
   const { t } = useTranslation();
-  // const [selectedCategory, setCategory] = useState(dataList[0].name);
   const [activeIndex, setActiveIndex] = useState(() => {
     if (categoryType) {
-      if (categoryType === "Religious") {
+      if (categoryType === "Religious" || categoryType === "धार्मिक") {
         return 0;
-      } else if (categoryType === "Municipality") {
+      } else if (categoryType === "Municipality"|| categoryType === "नगरपालिका") {
         return 1;
-      } else if (categoryType === "Natural") {
+      } else if (categoryType === "Natural" || categoryType === "प्राकृतिक") {
         return 3;
       } else {
         return 4;

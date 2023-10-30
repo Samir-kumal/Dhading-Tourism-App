@@ -90,7 +90,7 @@ const HomeDetailContainer = () => {
              category={t("homepage.firstpage.sites.sites_category.municipality")}
              linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
         />
-        <SeeMoreButton onPress={() => handlePress(categories[2])}>
+        <SeeMoreButton onPress={() => handlePress(categories[3])}>
           <View>
             <Text className="text-lg font-semibold opacity-70">
               See More Municipalities

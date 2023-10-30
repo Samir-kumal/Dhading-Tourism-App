@@ -5,32 +5,9 @@ import DataLayout from "./DataHandler";
 import i18n from "../../translation";
 
 const PopularListsMemo = memo(DataLayout);
-const matchingSlugs = {
-  eng: [
-    "indreshwor-mahadev-temple",
-    "triveni-ghat",
-    "gorakhnath-temple",
-    "ladkeshwor-dham",
-    "balathali-faat",
-    "krishna-temple-jakidol",
-  ],
-  nep: [
-    "इन्द्रेश्वर-महादेव-मन्दिर-(अन्तर-संग्रहालय)",
-    "त्रिवेणी-घाट",
-    "गोरखनाथ-मन्दिर",
-    "लडकेश्वर-धाम",
-    "बालथली-सामाजिक-होमस्टे",
-    "कृष्ण-मन्दिर-(जकडिल)",
-  ],
-};
 
 const ContentLayout = ({ title, data, category, linkButton }) => {
-  const [selectedLanguage, setSelectedLangauge] = useState(i18n.language); // "en" for English, "np" for Nepali
   const router = useRouter();
-
-  useEffect(() => {
-    setSelectedLangauge(i18n.language);
-  }, [i18n.language]);
 
   const thisData =
     data &&

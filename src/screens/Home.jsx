@@ -12,11 +12,7 @@ import { Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { useDataProvider } from "../context/DataProvider";
 import { InternetContext } from "../context/Internet";
-import {
-  MainContainer,
-  ContentLayout,
-  PlaceCard,
-} from "../components/common";
+import { MainContainer, ContentLayout, PlaceCard } from "../components/common";
 import { Menu, Header, Sheet } from "./nav";
 import { useTranslation } from "react-i18next";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -42,13 +38,12 @@ const Home = React.memo(() => {
     );
     setFilteredData(filteredItems);
   };
-  useEffect(()=>{
-    setIsFocused(false)
-    setInputData("")
-  },[pathname])
+  useEffect(() => {
+    setIsFocused(false);
+    setInputData("");
+  }, [pathname]);
 
   useEffect(() => {
-
     setTimeout(() => {
       setIsConnected(internet.status);
     }, 1000);
@@ -75,15 +70,10 @@ const Home = React.memo(() => {
     [datas]
   );
 
-
-
   const colorScheme = useColorScheme();
-
-  
 
   return (
     <>
-    
       {!isConnected ? (
         <>
           <StatusBar
@@ -93,8 +83,11 @@ const Home = React.memo(() => {
         </>
       ) : (
         <MainContainer>
-      <StatusBar style={colorScheme === 'dark' ? 'light-content' : 'dark'}  backgroundColor="transparent"/>
-          
+          <StatusBar
+            style={colorScheme === "dark" ? "light-content" : "dark"}
+            backgroundColor="transparent"
+          />
+
           <ScrollView
             className="mb-16 relative "
             showsVerticalScrollIndicator={false}
@@ -103,45 +96,41 @@ const Home = React.memo(() => {
             }
           >
             <Header show={show} setShow={setShow} />
-            {/* {MemoizedWeather} */}
+
             {MemoizedCarousel}
             <View className=" h-fit  absolute top-36 w-full">
               <View className="flex flex-row flex-wrap items-center justify-center ">
                 <Text className="text-white text-center  font-bold text-3xl">
                   {t("homepage.firstpage.heading")}
                 </Text>
-                <Text className="text-white text-center  font-bold text-2xl">
-                </Text>
+                <Text className="text-white text-center  font-bold text-2xl"></Text>
               </View>
               <View className="bg-transparent  w-full bottom-4 ">
-              <View className="relative">
-            <View className="absolute z-10 top-10 right-8">
-              <MaterialIcons name="search" size={24} color="#999" />
-            </View>
-            <TextInput
-            value={inputData}
-            onChangeText={(text) =>{
-              setInputData(text)
-              handleFilter(text);
-            } }
-            onFocus={() => setIsFocused(true)}
-              placeholder={t("homepage.firstpage.text_input")}
-              className="bg-white py-4 rounded-lg mx-2 mt-[20px] px-4"
-            />
-          </View>
+                <View className="relative">
+                  <View className="absolute z-10 top-10 right-8">
+                    <MaterialIcons name="search" size={24} color="#999" />
+                  </View>
+                  <TextInput
+                    value={inputData}
+                    onChangeText={(text) => {
+                      setInputData(text);
+                      handleFilter(text);
+                    }}
+                    onFocus={() => setIsFocused(true)}
+                    placeholder={t("homepage.firstpage.text_input")}
+                    className="bg-white py-4 rounded-lg mx-2 mt-[20px] px-4"
+                  />
+                </View>
               </View>
             </View>
             <View className=" h-14 items-center justify-center">
               <HomeGridComponent />
-
             </View>
 
-            {isFocused && filteredData.length >0 ? (
-
-              filteredData.map((item,index) => (
+            {isFocused && filteredData.length > 0 ? (
+              filteredData.map((item, index) => (
                 <>
-                <PlaceCard key={item.slug_name} item={item} />
-
+                  <PlaceCard key={item.slug_name} item={item} />
                 </>
               ))
             ) : (
@@ -154,15 +143,12 @@ const Home = React.memo(() => {
                 linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
               />
             )}
-            <VideoContainer/>
+            <VideoContainer />
           </ScrollView>
 
-        
-      <Menu />
-
+          <Menu />
         </MainContainer>
       )}
-
     </>
   );
 });

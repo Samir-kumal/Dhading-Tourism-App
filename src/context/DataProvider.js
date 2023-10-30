@@ -21,7 +21,9 @@ export const DataProvider = (props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [lang, setLang] = useState("eng");
   const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
-  const url2 = `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
+  // const url2 = `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
+  const url2 = "http://prayatan.jwalamukhimun.gov.np/v1/places/ne";
+
   const token = "3fba649578447eb76c59";
   const [videoData, setVideoData] = useState([]);
 
@@ -47,25 +49,37 @@ export const DataProvider = (props) => {
             "api-key": "3fba649578447eb76c59",
           },
         });
-        // const response = await axios.get( url2
 
-        // );
-        const data = response.data.places;
-        const Pages = response.data.totalCount;
-        setDatas(data);
-
-        setTotalPages(Pages);
+        if (response) {
+          const data = response.data.places;
+          const Pages = response.data.totalCount;
+          setDatas(data);
+          setTotalPages(Pages);
+        }
+      } else if (i18n.language === "nep") {
+        const response = await axios.get(url2, {
+          headers: {
+            "api-key": "3fba649578447eb76c59",
+          },
+        });
+        if (response) {
+          const data = response.data.places;
+          const Pages = response.data.totalCount;
+          setDatas(data);
+          setTotalPages(Pages);
+        }
       } else {
         const response = await axios.get(url, {
           headers: {
             "api-key": "3fba649578447eb76c59",
           },
         });
-        const data = response.data.places;
-        const Pages = response.data.totalCount;
-
-        setDatas(data);
-        setTotalPages(Pages);
+        if (response) {
+          const data = response.data.places;
+          const Pages = response.data.totalCount;
+          setDatas(data);
+          setTotalPages(Pages);
+        }
       }
     } catch (err) {
       setError(err);
@@ -89,10 +103,9 @@ export const DataProvider = (props) => {
     FetchVideoData();
   }, []);
 
-
   const handleLanguageChange = () => {
-
-  }
+    fetchData();
+  };
 
   const contextValue = useMemo(
     () => ({
@@ -103,7 +116,7 @@ export const DataProvider = (props) => {
       fetchNextPage,
       videoData,
     }),
-    [datas, error, loading, videoData]
+    [datas, error, loading, videoData, handleLanguageChange]
   );
 
   return (

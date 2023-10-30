@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Pressable,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
 import * as Svg from "react-native-svg";
@@ -18,15 +19,15 @@ import { useDataProvider } from "../context/DataProvider";
 const Localization = ({ langModal, setLangModal, setTitle }) => {
   const { handleLanguageChange } = useDataProvider();
   const [language, setLanguage] = React.useState(() => {
-    if (i18n.language === "eng") {
-      return [
-        { name: "English", selected: true },
-        { name: "Nepali", selected: false },
-      ];
-    } else {
+    if (i18n.language === "nep") {
       return [
         { name: "English", selected: false },
         { name: "Nepali", selected: true },
+      ];
+    } else {
+      return [
+        { name: "English", selected: true },
+        { name: "Nepali", selected: false },
       ];
     }
   });
@@ -60,6 +61,7 @@ const Localization = ({ langModal, setLangModal, setTitle }) => {
         onRequestClose={() => setLangModal(!langModal)}
         transparent={true}
       >
+        <TouchableWithoutFeedback onPress={()=>setLangModal(!langModal)}>
         <View className=" bg-[#00000028]   h-full w-full flex items-center justify-center">
           <View className="h-[30%] w-[90%] bg-white rounded-md">
             <Text className="font-bold text-2xl text-center mt-2">
@@ -116,6 +118,7 @@ const Localization = ({ langModal, setLangModal, setTitle }) => {
             </View>
           </View>
         </View>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );

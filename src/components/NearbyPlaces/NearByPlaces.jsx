@@ -8,7 +8,7 @@ import * as Svg from "react-native-svg";
 import { icons } from "../../constants";
 import Permision from "../permision";
 // Function to calculate the distance between two coordinates using the Haversine formula.
-
+import { useTranslation } from "react-i18next";
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the Earth in km
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -25,6 +25,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 const NearbyPlaces = () => {
   const { datas } = useContext(DataContext);
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [nearbyPlacesData, setNearbyPlacesData] = useState([]);
   const [isUserLocation, setUserLocation] = useState(false);
@@ -44,15 +45,16 @@ const NearbyPlaces = () => {
         } else {
           console.log("User location not found in AsyncStorage.");
           setUserLocation(true);
-          fetchUserLocation();
+          // fetchUserLocation();
         }
       } catch (error) {
         console.log("Error retrieving user location from AsyncStorage:", error);
       }
     };
-
-    fetchUserLocation();
-  }, []);
+    if (!isUserLocation) {
+      fetchUserLocation();
+    }
+  }, [isUserLocation]);
 
   const filterNearbyPlaces = (userLocation) => {
     // Filter the data array to get nearby places based on userLocation
@@ -113,7 +115,7 @@ const NearbyPlaces = () => {
               }}
             >
               <Svg.SvgXml xml={icons.noPlaceFound} />
-              <Text style={{ fontSize: 20, padding: 5 }}>Place not found</Text>
+              <Text style={{ fontSize: 20, padding: 5 }}>{t("nearby.title")}</Text>
             </View>
           )}
         </>

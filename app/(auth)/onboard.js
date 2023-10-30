@@ -25,6 +25,8 @@ const onboard = () => {
         }
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
+        await SecureStore.setItemAsync("user_status", "existing");
       }
     }
     getUserInfo();

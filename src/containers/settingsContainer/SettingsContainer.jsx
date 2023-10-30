@@ -19,20 +19,22 @@ const SettingContainer = ({ name, email, phone, signOut }) => {
   useEffect(() => {
     if (i18n.language === "eng") {
       setData(eng);
-    } else {
+    } else if (i18n.language === "nep") {
       setData(nep);
+    } else {
+      setData(eng);
     }
-  });
+  }, [i18n.language]);
 
   const handleClick = (item) => {
-    if (item === "Log Out") {
+    if (item === "Log Out" || item === "बाहिर निस्कनु") {
       signOut();
-    } else if (item === "My Details") {
+    } else if (item === "My Details" || item === "मेरो विवरण") {
       router.push({
         pathname: "/details",
         params: { name, email, phone },
       });
-    } else if (item === "About Our App") {
+    } else if (item === "About Our App" || item === "हाम्रो एपको बारेमा") {
       router.push({
         pathname: "/about",
       });
