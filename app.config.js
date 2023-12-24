@@ -4,10 +4,10 @@ module.exports = {
   version: "3.0.0",
   orientation: "portrait",
   scheme: "wine-dwine",
-  icon: "./assets/Images/icon.png",
+  icon: "./assets/Logos/AppLogo/logo.png",
   userInterfaceStyle: "automatic",
   splash: {
-    image: "./assets/Images/splash.png",
+    image: "./assets/Logos/AppLogo/logo.png",
     resizeMode: "contain",
     backgroundColor: "#ffffff",
   },
@@ -17,7 +17,7 @@ module.exports = {
     entitlements: {
       "com.apple.developer.networking.wifi-info": true,
     },
-    bundleIdentifier: "com.bms.dhadhingapp",
+    bundleIdentifier: "com.bms.jwalamukhimun",
     buildNumber: "1.0.0",
     config: {
       googleMapsApiKey: "AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80",
@@ -33,10 +33,10 @@ module.exports = {
       "android.permission.FOREGROUND_SERVICE",
     ],
     adaptiveIcon: {
-      foregroundImage: "./assets/Images/adaptiveicon.png",
+      foregroundImage: "./assets/Logos/AppLogo/logo.png",
       backgroundColor: "#ffffff",
     },
-    package: "com.bms.dhadhingapp",
+    package: "com.bms.jwalamukhimun",
     versionCode: 3,
     config: {
       googleMaps: {
@@ -45,7 +45,7 @@ module.exports = {
     },
   },
   web: {
-    favicon: "./assets/Images/adaptiveicon.png",
+    favicon: "./assets/Logos/AppLogo/logo.png",
     bundler: "metro",
   },
   plugins: [

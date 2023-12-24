@@ -11,7 +11,7 @@ export default function About() {
     <View style={styles.MainWrapper}>
       <View>
         <View style={styles.LogoWrapper}>
-          <Image style={styles.LogoImage} source={images.logo2} />
+          <Image style={styles.LogoImage} source={require("../../../assets/Logos/AppLogo/logo.png")} />
         </View>
         <View style={styles.TitleHeading}>
           <Text
