@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.bms.dhadhingapp'
+    namespace 'com.bms.jwalamukhimun'
     defaultConfig {
-        applicationId 'com.bms.dhadhingapp'
+        applicationId 'com.bms.jwalamukhimun'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3

@@ -1,4 +1,4 @@
-package com.bms.dhadhingapp;
+package com.bms.jwalamukhimun;
 
 import android.os.Build;
 import android.os.Bundle;
