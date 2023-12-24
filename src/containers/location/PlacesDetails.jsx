@@ -49,7 +49,7 @@ const PlacesDetails = () => {
   const [rating, setRating] = useState(0); // Initial rating is 0, you can set your default rating here
   const [ratingModal, setRatingModal] = useState(false);
   const parseUrl = JSON.parse(images);
-
+  const fixedRating = parseFloat(totalRating).toFixed(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState({
     url: parseUrl[0],
@@ -220,7 +220,7 @@ const PlacesDetails = () => {
                   <FontAwesome name="star" size={24} color="#FF5733" />
                   <View>
                     <Text>Rating</Text>
-                    <Text className="text-xs ">{totalRating}</Text>
+                    <Text className="text-xs ">{fixedRating}</Text>
                   </View>
                 </View>
               </View>

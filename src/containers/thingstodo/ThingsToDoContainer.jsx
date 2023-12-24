@@ -119,7 +119,15 @@ const ThingsToDoContainer = () => {
 
 
   useEffect(()=>{
-    if (i18n.language !== "nep") {
+    if (i18n.language === "eng" || i18n.language === "en-GB" ||
+                i18n.language === "en-US" ||
+                i18n.language === "en-IN" ||
+                i18n.language === "en-CA" ||
+                i18n.language === "en-AU" ||
+                i18n.language === "en-NZ" ||
+                i18n.language === "en-SG" ||
+                i18n.language === "en-MY" ||
+                i18n.language === "en") {
       setData(Data.eng)
     }else {
       setData(Data.nep);
@@ -132,10 +140,18 @@ const ThingsToDoContainer = () => {
   const [filteredData, setFilteredData] = React.useState(Data.eng);
 
   useEffect(()=>{
-    if(i18n.language !== "eng"){
-      setFilteredData(Data.nep)
+    if(i18n.language === "eng" || i18n.language === "en-GB" ||
+    i18n.language === "en-US" ||
+    i18n.language === "en-IN" ||
+    i18n.language === "en-CA" ||
+    i18n.language === "en-AU" ||
+    i18n.language === "en-NZ" ||
+    i18n.language === "en-SG" ||
+    i18n.language === "en-MY" ||
+    i18n.language === "en"){
+      setFilteredData(Data.eng)
     }else {
-      setFilteredData(Data.eng);
+      setFilteredData(Data.nep);
     }
   })
 

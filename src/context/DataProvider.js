@@ -43,7 +43,18 @@ export const DataProvider = (props) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      if (i18n.language === "eng") {
+      if (
+        i18n.language === "eng" ||
+        i18n.language === "en-GB" ||
+        i18n.language === "en-US" ||
+        i18n.language === "en-IN" ||
+        i18n.language === "en-CA" ||
+        i18n.language === "en-AU" ||
+        i18n.language === "en-NZ" ||
+        i18n.language === "en-SG" ||
+        i18n.language === "en-MY" ||
+        i18n.language === "en"
+      ) {
         const response = await axios.get(url, {
           headers: {
             "api-key": "3fba649578447eb76c59",

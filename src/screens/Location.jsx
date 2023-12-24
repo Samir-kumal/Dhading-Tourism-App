@@ -33,7 +33,7 @@ const Location = () => {
          <Maps data={datas} />
     
          <Pressable
-              onPress={() => router.back()}
+              onPress={() => router.push("(tabs)/home")}
               className="h-10 w-fit px-3 bg-white shadow-xl absolute flex-row rounded-full translate-x-2 translate-y-8 z-20  flex items-center justify-center"
             >
               <Ionicons
