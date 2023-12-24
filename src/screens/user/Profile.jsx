@@ -30,7 +30,7 @@ console.log(user)
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-    setName(user.user?.displayName || user.user?.name);
+    setName(user?.displayName || user.user?.name);
     setEmail(user?.email || user.user?.email);
   }, [user]);
 
