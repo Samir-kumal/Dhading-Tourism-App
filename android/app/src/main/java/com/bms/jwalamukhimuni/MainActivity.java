@@ -1,4 +1,4 @@
-package com.bms.jwalamukhimun;
+package com.bms.jwalamukhimuni;
 
 import android.os.Build;
 import android.os.Bundle;

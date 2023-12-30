@@ -113,13 +113,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.bms.jwalamukhimun'
+    namespace 'com.bms.jwalamukhimuni'
     defaultConfig {
-        applicationId 'com.bms.jwalamukhimun'
+        applicationId 'com.bms.jwalamukhimuni'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "3.0.0"
+        versionCode 1
+        versionName "1.0.0"
     }
 
     splits {

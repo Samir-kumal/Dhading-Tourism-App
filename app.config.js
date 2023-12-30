@@ -1,10 +1,10 @@
 module.exports = {
   name: "Visit Jwalamukhi",
   slug: "visit-jwalamukhi",
-  version: "3.0.0",
+  version: "1.0.0",
   orientation: "portrait",
   scheme: "wine-dwine",
-  icon: "./assets/Logos/AppLogo/logo.png",
+  icon: "./assets/Logos/AppLogo/applogo.png",
   userInterfaceStyle: "automatic",
   splash: {
     image: "./assets/Logos/AppLogo/logo.png",
@@ -36,8 +36,8 @@ module.exports = {
       foregroundImage: "./assets/Logos/AppLogo/logo.png",
       backgroundColor: "#ffffff",
     },
-    package: "com.bms.jwalamukhimun",
-    versionCode: 3,
+    package: "com.bms.jwalamukhimuni",
+    versionCode: 1,
     config: {
       googleMaps: {
         apiKey: "AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80",
@@ -62,10 +62,10 @@ module.exports = {
   extra: {
     WEATHER_API_KEY: "f873e2396c79be34489bd8d70b7e5f32",
     "eas": {
-      "projectId": "cceb7cd0-30ec-46a8-bdfd-4ada1e78ab0f"
+      "projectId": "cf0cf1a8-7504-46eb-b2cc-089a635edde4"
     }
   },
-  owner: "samir_kumal",
+  owner: "sawmeerrr",
   sdkVersion: "48.0.0",
   platforms: ["ios", "android", "web"],
 };
