@@ -14,9 +14,11 @@ const Gallery = () => {
   const { datas } = useDataProvider();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    if(datas && datas.length > 0){
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+    }
   }, []);
 
   return (

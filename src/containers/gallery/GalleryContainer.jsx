@@ -42,7 +42,7 @@ const GalleryContainer = ({ data }) => {
     <View className="flex flex-col  justify-between gap-y-1">
       
       <View className="h-fit w-full flex items-center justify-center flex-wrap flex-row gap-y-4 ">
-        {categoryItems.map((item) => (
+        { categoryItems?.length > 0 && categoryItems.map((item) => (
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => handlePress(item)}

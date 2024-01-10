@@ -174,7 +174,7 @@ const Maps = ({ data }) => {
               />
             )}
           </Marker>
-          {visibleMarkers?.length &&
+          {visibleMarkers?.length > 0 &&
             visibleMarkers.map((marker) => (
               <Marker
                 key={marker._id}
