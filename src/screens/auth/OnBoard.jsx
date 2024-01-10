@@ -17,10 +17,10 @@ const Welcome = () => {
           <Logo source="welcome" size={180} />
           
           <View className="flex items-center gap-y-6 mt-4">
-            <Text className="text-xl font-bold">NEPAL IN NUTSHELL</Text>
+            <Text className="text-xl font-bold">WELCOME TO JWALAMUKHI</Text>
             <Text className="text-center px-8">
-              Hetauda is an awesome place for your tourism destination, where
-              alot of things are availble to explore. the place has a unique
+              Jwalamukhi Rural Municipality is an small yet beautiful place for your tourism destination, where
+              a lot of things are available to explore. the place has a unique
               type of beauty of its own
             </Text>
           </View>
