@@ -31,6 +31,7 @@ const Home = React.memo(() => {
   const [filteredData, setFilteredData] = useState(datas);
   const [inputData, setInputData] = useState("");
   const pathname = usePathname();
+  console.log("data",datas)
 
   const handleFilter = (text) => {
     const filteredItems = datas.filter((item) =>
@@ -127,7 +128,7 @@ const Home = React.memo(() => {
               <HomeGridComponent />
             </View>
 
-            {isFocused && filteredData.length > 0 ? (
+            {isFocused && inputData.length > 0 && filteredData.length > 0 ? (
               filteredData.map((item, index) => (
                 <>
                   <PlaceCard key={item.slug_name} item={item} />

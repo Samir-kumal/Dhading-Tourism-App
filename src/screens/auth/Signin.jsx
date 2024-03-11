@@ -29,7 +29,11 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/Auth";
 import CircleWrapper from "../../components/common/CircleWrapper";
 import Logo from "../../components/common/Logo";
+import { url } from "../../context/DataProvider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 WebBrowser.maybeCompleteAuthSession();
+
 
 const Signin = () => {
   useBackButtonExit();
@@ -44,24 +48,43 @@ const Signin = () => {
     onSubmit(); // Call the onSubmit method here
   };
 
-  const onSubmit = () => {
-    setIsLoading(true);
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(`${url}/auth/logout`);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    axios
-      .post(
-        "http://103.140.1.252/v1/auth/login?apiKey=3fba649578447eb76c59",
-        values
-      )
-      .then(async (response) => {
-        setError(false);
-        const userObj = await getUser(response.data.token);
-        signIn(userObj);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error.response.data.message);
-      });
+  const onSubmit = async () => {
+    setIsLoading(true);
+    const response = await axios.post(`${url}/auth/signin`, {
+      username: values.email,
+      password: values.password,
+    });
+    console.log(response);
+    await AsyncStorage.setItem("@token", response.data.data.accessToken )
+    signIn(response.data.data.user);
+    setIsLoading(false);
+    // axios
+    //   .post(`${url}/auth/signin`, {
+    //     username: values.email,
+    //     password: values.password,
+    //   })
+    //   .then(async (response) => {
+    //     console.log("response from Login", response);
+    //     setError(false);
+    //     console.log("hello");
+
+    //     const userObj = await getUser(response.data.accessToken);
+    //     signIn(userObj);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //     setError(error.response.data.message);
+    //   });
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -77,11 +100,10 @@ const Signin = () => {
   return (
     <>
       <SafeAreaView className="bg-cardColor flex-1 h-full">
-        
         <View className="z-10  h-0">
           <CircleWrapper />
         </View>
-        
+
         <View className="h-40 w-full relative justify-center items-center ">
           {/* <View className="langButton absolute top-5 right-7">
             <LocalizationBtn />
@@ -158,6 +180,7 @@ const Signin = () => {
           >
             {t("signinPage.button")}
           </Button>
+          <Button handleSubmit={handleLogout}>Logout</Button>
           <Modal visible={isLoading} transparent animationType="fade">
             <View style={styles.modalBackground}>
               <View className="flex flex-row gap-x-6 px-14 py-8 bg-white items-center  justify-center rounded-md">

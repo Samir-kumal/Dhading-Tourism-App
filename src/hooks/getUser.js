@@ -1,15 +1,13 @@
 import axios from "axios";
+import {url} from "../context/DataProvider";
 
-export default function getUser(token) {
-  console.log("tokem form get user", token);
+export default function getUser(email, password) {
   return new Promise((resolve, reject) => {
-    if (!token) reject("Token not provided");
 
     axios
-      .get("http://103.140.1.252/v1/user?apiKey=3fba649578447eb76c59", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .post(`${url}/auth/signin`, {
+        username:email,
+        password:password
       })
       .then((response) => {
         resolve(response.data);

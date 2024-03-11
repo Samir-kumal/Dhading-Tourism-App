@@ -27,6 +27,7 @@ import { FontAwesome, AntDesign, Entypo } from "@expo/vector-icons";
 import PlaceDetailComponent from "../../components/places/placesDetail/PlaceDetailComponent";
 import { Rating } from "../../components";
 import Colors from "../../constants/themes";
+import { useDataProvider } from "../../context/DataProvider";
 const IMAGE_SCALE_MAX = 100;
 const LABEL_HEADER_MARGIN = 100;
 
@@ -39,23 +40,27 @@ const PlacesDetails = () => {
     coordinates,
     location,
     wardno,
-    images,
+    // images,
   } = useLocalSearchParams();
+  console.log(coordinates);
   const delimiter = ",";
-
+  const { datas } = useDataProvider();
   const coordinatesArray = coordinates.split(delimiter);
   const [isLoading, setIsLoading] = useState(true);
   const height = Dimensions.get("window").height * 0.8;
   const [rating, setRating] = useState(0); // Initial rating is 0, you can set your default rating here
   const [ratingModal, setRatingModal] = useState(false);
-  const parseUrl = JSON.parse(images);
   const fixedRating = parseFloat(totalRating).toFixed(1);
   const [modalVisible, setModalVisible] = useState(false);
-  const [image, setImage] = useState({
-    url: parseUrl[0],
-  });
-  const [imageArray, setImageArray] = useState(parseUrl);
-
+  const [filteredItem, setFilteredItem] = useState(null);
+  useEffect(() => {
+    if (datas) {
+      const foundItem = datas.find((item) => item._id === placeId);
+      setFilteredItem(foundItem);
+    }
+  }, [datas, placeId]); 
+  // const [imageArray, setImageArray] = useState(filteredItem.images);
+ 
   const handleClick = () => {
     setModalVisible(true);
   };
@@ -85,18 +90,7 @@ const PlacesDetails = () => {
 
   return (
     <>
-      {isLoading ? (
-        <View
-          className="h-[100%]  flex flex-row items-center justify-center w-full  "
-          style={{ height: height }}
-        >
-          <StatusBar
-            style={colorScheme === "dark" ? "light-content" : "dark-content"}
-          />
-          <ActivityIndicator size={"large"} color={Colors.primary} />
-          <Text>Loading...</Text>
-        </View>
-      ) : (
+      {!isLoading && filteredItem.images ? (
         <>
           <ScrollView
             style={Colors.theme}
@@ -130,7 +124,7 @@ const PlacesDetails = () => {
               resizeMode="cover"
               className=" h-[40vh]  "
               source={{
-                uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
+                uri: filteredItem.images[0]
               }}
               style={{
                 transform: [
@@ -171,36 +165,36 @@ const PlacesDetails = () => {
               >
                 <AntDesign name="arrowsalt" size={24} color="white" />
               </Pressable>
-              <View className="m-2 mt-4">
-                <FlatList
-                  data={imageArray}
-                  scrollEnabled={true}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item) => item}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      onPress={() => {
-                        setImage({
-                          url: item,
-                        });
+              {/* <View className="m-2 mt-4">
+              <FlatList
+                data={imageArray}
+                scrollEnabled={true}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item) => item}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setImage({
+                        url: item,
+                      });
+                    }}
+                    className={
+
+                      "w-14 h-12 bg-slate-300 rounded-xl mx-2"
+                    }
+                  >
+                    <Image
+                      className="rounded-lg"
+                      style={{ width: "100%", height: "100%" }}
+                      source={{
+                        uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
                       }}
-                      className={
-                        
-                        "w-14 h-12 bg-slate-300 rounded-xl mx-2"
-                      }
-                    >
-                      <Image
-                        className="rounded-lg"
-                        style={{ width: "100%", height: "100%" }}
-                        source={{
-                          uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
-                        }}
-                      />
-                    </TouchableOpacity>
-                  )}
-                />
-              </View>
+                    />
+                  </TouchableOpacity>
+                )}
+              />
+            </View> */}
               {/* Bottom Section */}
               <View className="flex flex-row items-center justify-between mx-4 mt-6">
                 <View className="w-60">
@@ -227,7 +221,12 @@ const PlacesDetails = () => {
 
               {/* Map and Rating and audio */}
               <View className="mx-4">
-                <PlaceDetailComponent description = {description} setRatingModal={setRatingModal} ratingModal={ratingModal} coordinates = {coordinatesArray} />
+                <PlaceDetailComponent
+                  description={description}
+                  setRatingModal={setRatingModal}
+                  ratingModal={ratingModal}
+                  coordinates={coordinatesArray}
+                />
               </View>
               {/* Description */}
               <View className="mx-4 mt-8 h-fit flex items-end justify-end bg-slate-100 relative">
@@ -238,7 +237,7 @@ const PlacesDetails = () => {
                   }}
                   className="text-justify "
                 >
-                  {description.substring(0,150) + ". . ."}
+                  {description.substring(0, 150) + ". . ."}
                 </Text>
                 <TouchableOpacity
                   className=" py-3 bg-primary px-5 m-2 rounded-md"
@@ -258,7 +257,6 @@ const PlacesDetails = () => {
                 </TouchableOpacity>
               </View>
 
-              
               <Modal
                 visible={modalVisible}
                 animationType="fade"
@@ -277,58 +275,56 @@ const PlacesDetails = () => {
                   >
                     <Entypo name="cross" size={32} color="black" />
                   </TouchableOpacity>
-                  <Image
-                    source={{
-                      uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
-                      // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
-                    }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "contain",
-                    }}
-                  />
+                  {/* <Image
+                  source={{
+                    uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
+                    // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
+                  }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                /> */}
                 </View>
               </Modal>
             </Animated.View>
           </ScrollView>
           {/* ///////for rating */}
           <Modal
-                visible={ratingModal}
-                animationType="fade"
-                onRequestClose={() => setRatingModal(false)}
-                hardwareBackButton={true}
-                supportedOrientations={["portrait", "landscape"]}
-                transparent={
-                  true
-                }
-                
-              >
-                <View className="flex mt-2 w-full pb-3 items-center justify-center h-screen " style={styles.semiTransparentBlack}>
-                  <View className=" bg-cardColor p-7 rounded-md">
-                   
-                  <Text className="pl-3 mt-1 text-lg font-bold">
-                    Rate this Place
-                  </Text>
-                  <Text className="pl-3  text-md">
-                    Tell others what you think
-                  </Text>
-                  <View className="flex items-center justify-center mt-3">
-                    <Rating
-                      maxStars={5}
-                      rating={rating}
-                      placeId={placeId}
-                      onStarPress={handleStarPress}
-                      setRatingModal={setRatingModal}
-                      ratingModal={ratingModal}
-                    />
-                  </View>
-                  </View>
+            visible={ratingModal}
+            animationType="fade"
+            onRequestClose={() => setRatingModal(false)}
+            hardwareBackButton={true}
+            supportedOrientations={["portrait", "landscape"]}
+            transparent={true}
+          >
+            <View
+              className="flex mt-2 w-full pb-3 items-center justify-center h-screen "
+              style={styles.semiTransparentBlack}
+            >
+              <View className=" bg-cardColor p-7 rounded-md">
+                <Text className="pl-3 mt-1 text-lg font-bold">
+                  Rate this Place
+                </Text>
+                <Text className="pl-3  text-md">
+                  Tell others what you think
+                </Text>
+                <View className="flex items-center justify-center mt-3">
+                  <Rating
+                    maxStars={5}
+                    rating={rating}
+                    placeId={placeId}
+                    onStarPress={handleStarPress}
+                    setRatingModal={setRatingModal}
+                    ratingModal={ratingModal}
+                  />
                 </View>
-                 
-              </Modal>
+              </View>
+            </View>
+          </Modal>
 
-              {/* ///rating modal */}
+          {/* ///rating modal */}
           {show && (
             <BottomSheet
               ref={bottomSheetRef}
@@ -341,6 +337,19 @@ const PlacesDetails = () => {
               </BottomSheetScrollView>
             </BottomSheet>
           )}
+        </>
+      ) : (
+        <>
+          <View
+            className="h-[100%]  flex flex-row items-center justify-center w-full  "
+            style={{ height: height }}
+          >
+            <StatusBar
+              style={colorScheme === "dark" ? "light-content" : "dark-content"}
+            />
+            <ActivityIndicator size={"large"} color={Colors.primary} />
+            <Text>Loading...</Text>
+          </View>
         </>
       )}
     </>
@@ -365,7 +374,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "grey",
   },
-    semiTransparentBlack: {
-      backgroundColor: 'rgba(0, 0, 0, 0.09)',
-    },
+  semiTransparentBlack: {
+    backgroundColor: "rgba(0, 0, 0, 0.09)",
+  },
 });

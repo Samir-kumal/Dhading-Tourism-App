@@ -19,12 +19,12 @@ export default function VideoController({ videoId }) {
   console.log(videoId);
   return (
     <View renderToHardwareTextureAndroid={true} className="w-full py-2">
-      <YoutubePlayer
+      {videoId ? <YoutubePlayer
         height={200}
         play={playing}
         videoId={videoId}
         onChangeState={onStateChange}
-      />
+      />: <View><Text>Loading....</Text></View>}
       {/* <WebView
       
         style={{ width: "100%", height: 200 }}

@@ -3,7 +3,7 @@ import * as yup from "yup";
 export const signinSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Please enter a valid email")
+    // .email("Please enter a valid email")
     .required("Email is Required"),
   password: yup.string().required("Password is required"),
 });

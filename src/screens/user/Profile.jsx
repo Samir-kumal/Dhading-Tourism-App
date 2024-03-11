@@ -25,13 +25,18 @@ const UserProfile = ({ setName, setEmail, setPhone }) => {
   const { user } = useAuth();
   const {t} = useTranslation();
   console.log(Object.keys(user).length === 0, " form profile");
+  console.log(user)
+
+  if(user){
 console.log(user)
+
+  }
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-    setName(user?.displayName || user.user?.name);
-    setEmail(user?.email || user.user?.email);
+    setName( user?.fullname || user?.displayName || user?.name);
+    setEmail(user?.email || user?.email);
   }, [user]);
 
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
@@ -180,7 +185,7 @@ console.log(user)
             )}
           </>
           <Text style={styles.text} className=" p-1 text-xl font-bold ">
-            {user?.name || user.user?.name || user?.displayName || "Username"}
+            {user?.fullname ||  user?.name || user.user?.name || user?.displayName || "Username"}
           </Text>
           <Text
             style={[styles.text, styles.smallText]}

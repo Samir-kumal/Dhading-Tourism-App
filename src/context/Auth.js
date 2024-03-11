@@ -29,6 +29,7 @@ function useProtectedRoute(user) {
 }
 
 export function Provider(props) {
+
   const router = useRouter();
   const [user, setAuth] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -36,8 +37,9 @@ export function Provider(props) {
   useEffect(() => {
     setLoading(true);
     const isUserLoggedIn = async () => {
-      const respUser = await AsyncStorage.getItem("@user");
-      setAuth(JSON.parse(respUser));
+      const userString = await AsyncStorage.getItem("@user");
+      const parsedUser = JSON.parse(userString);
+      setAuth(parsedUser);
       setLoading(false);
     };
     isUserLoggedIn();
@@ -48,19 +50,20 @@ export function Provider(props) {
 
   const signIn = async (userObj) => {
     setLoading(true);
+
     try {
       await AsyncStorage.setItem("@user", JSON.stringify(userObj));
       await SecureStore.setItemAsync("user_status", "existing");
       setAuth(userObj);
     } catch (error) {
       console.error("Error signing in:", error);
-    } 
+    }
   };
 
   //log out the user from session
   const signOut = async () => {
     setLoading(true);
-
+    
     await firebaseSignOut(auth);
     await AsyncStorage.removeItem("@user");
     await AsyncStorage.removeItem("@user_token");

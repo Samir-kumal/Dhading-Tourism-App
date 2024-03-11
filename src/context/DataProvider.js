@@ -8,7 +8,10 @@ export const DataContext = createContext();
 export function useDataProvider() {
   return React.useContext(DataContext);
 }
-
+export const url = "https://dev.castelltech.com/api/v1/";
+// const url2 = `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
+// const url2 = "http://prayatan.jwalamukhimun.gov.np/v1/places/ne";
+const url2 = "https://dev.castelltech.com/api/v1/";
 // Function to get the user's preferred language from AsyncStorage
 
 export const DataProvider = (props) => {
@@ -20,9 +23,7 @@ export const DataProvider = (props) => {
   const [limit] = useState(200);
   const [totalPages, setTotalPages] = useState(1);
   const [lang, setLang] = useState("eng");
-  const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
-  // const url2 = `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
-  const url2 = "http://prayatan.jwalamukhimun.gov.np/v1/places/ne";
+  // const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
 
   const token = "3fba649578447eb76c59";
   const [videoData, setVideoData] = useState([]);
@@ -55,32 +56,37 @@ export const DataProvider = (props) => {
         i18n.language === "en-MY" ||
         i18n.language === "en"
       ) {
-        const response = await axios.get(url, {
+        const response = await axios.get(`${url}/places`, {
           headers: {
-            "api-key": "3fba649578447eb76c59",
+            "Content-Type": "application/json",
+            "x-api-key": "5bdb68c9efa67cf69f3425f908",
           },
         });
 
         if (response) {
-          const data = response.data.places;
-          const Pages = response.data.totalCount;
+          const data = response.data.data;
+          const Pages = 1;
+          console.log(data);
           setDatas(data);
           setTotalPages(Pages);
         }
       } else if (i18n.language === "nep") {
-        const response = await axios.get(url2, {
+        const response = await axios.get(`${url}/places`, {
           headers: {
-            "api-key": "3fba649578447eb76c59",
+            "Content-Type": "application/json",
+            "x-api-key": "5bdb68c9efa67cf69f3425f908",
           },
         });
         if (response) {
+          console.log(response.data);
           const data = response.data.places;
           const Pages = response.data.totalCount;
+
           setDatas(data);
           setTotalPages(Pages);
         }
       } else {
-        const response = await axios.get(url, {
+        const response = await axios.get(`${url}/places`, {
           headers: {
             "api-key": "3fba649578447eb76c59",
           },
@@ -101,10 +107,8 @@ export const DataProvider = (props) => {
 
   const FetchVideoData = async () => {
     try {
-      const response = await axios.get(
-        "http://prayatan.jwalamukhimun.gov.np/v1/video-link"
-      );
-      setVideoData(response.data);
+      const response = await axios.get(`${url}/videos`);
+      setVideoData(response.data.data);
     } catch (err) {
       console.log(err);
     }

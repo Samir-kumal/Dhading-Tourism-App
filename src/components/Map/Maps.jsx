@@ -45,14 +45,22 @@ const handleBackAction = (
 // Function to filter markers based on visible region
 const filterVisibleMarkers = (data, region) => {
   return data.filter((marker) => {
-    const latitude = marker.coordinates.coordinates[0];
-    const longitude = marker.coordinates.coordinates[1];
-    return (
-      latitude >= region.latitude - region.latitudeDelta / 2 &&
-      latitude <= region.latitude + region.latitudeDelta / 2 &&
-      longitude >= region.longitude - region.longitudeDelta / 2 &&
-      longitude <= region.longitude + region.longitudeDelta / 2
-    );
+    if (marker) {
+      const latitude = marker.points.coordinates[0];
+      const longitude = marker.points.coordinates[1];
+      return (
+        latitude >= region.latitude - region.latitudeDelta / 2 &&
+        latitude <= region.latitude + region.latitudeDelta / 2 &&
+        longitude >= region.longitude - region.longitudeDelta / 2 &&
+        longitude <= region.longitude + region.longitudeDelta / 2
+      );
+    } else {
+      const latitude = 0;
+      const longitude = 0;
+      return (
+      latitude, longitude
+      );
+    }
   });
 };
 
@@ -145,7 +153,6 @@ const Maps = ({ data }) => {
     setVisibleMarkers(markersToDisplay);
   };
 
-
   return (
     <>
       {isLoading ? (
@@ -174,13 +181,14 @@ const Maps = ({ data }) => {
               />
             )}
           </Marker>
-          {visibleMarkers?.length > 0 &&
-            visibleMarkers.map((marker) => (
+          {data &&
+            data?.length > 0 &&
+            data.map((marker) => (
               <Marker
                 key={marker._id}
                 coordinate={{
-                  latitude: marker.coordinates.coordinates[0],
-                  longitude: marker.coordinates.coordinates[1],
+                  latitude: marker.points.coordinates[0],
+                  longitude: marker.points.coordinates[1],
                   latitudeDelta: 0.0922,
                   longitudeDelta: 0.0421,
                 }}
@@ -229,10 +237,6 @@ const Maps = ({ data }) => {
                   marker.category.toLowerCase() === "historical" && (
                     <MaterialIcons name="museum" size={24} color="grey" />
                   )}
-                {/* <Image
-                  source={images.marker}
-                  style={{ height: 30, width: 30 }}
-                /> */}
               </Marker>
             ))}
         </MapView>

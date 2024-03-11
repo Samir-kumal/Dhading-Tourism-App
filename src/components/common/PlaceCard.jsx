@@ -43,8 +43,7 @@ const PlaceCard = ({item}) => {
     <Pressable onPress={()=> handleClick(item)} className="w-[90vw] my-2 h-60 flex flex-row shadow-xl rounded-xl p-2 mx-2 bg-white">
       <Image
         source={{
-          uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item.images[0]}`,
-          // uri: `http://103.140.1.252/v1/places/image/${item.images[0]}`,
+          uri: item.images[0],
         }}
         style={{
           width: "50%",

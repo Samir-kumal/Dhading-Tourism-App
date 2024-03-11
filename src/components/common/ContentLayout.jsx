@@ -16,8 +16,8 @@ const ContentLayout = ({ title, data, category, linkButton }) => {
     );
 
   const renderedData = useMemo(() => {
-    if (thisData) {
-      return thisData.slice(0, 4);
+    if (data) {
+      return data.slice(0, 4);
     } else {
       return [];
     }

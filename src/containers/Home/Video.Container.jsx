@@ -39,7 +39,7 @@ console.log(videoData)
       ) : (
         videoData &&
         videoData.map((video) => (
-          <VideoController key={video._id} videoId={video.videoId} />
+          <VideoController key={video._id} videoId={video.link} />
         ))
       )}
     </View>
