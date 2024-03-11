@@ -9,7 +9,6 @@ import { Loading } from "../../components";
 const HomeDetailContainer = () => {
   const router = useRouter();
   const { datas } = useDataProvider();
-  // const categories = ["Religious", "Natural", "Tourism", "Municipality"];
   const { t } = useTranslation();
   const handlePress = (item) => {
     router.push({
@@ -19,26 +18,19 @@ const HomeDetailContainer = () => {
       },
     });
   };
-  // let categoriesArr = [];
 
-  // const categories = datas && datas.filter((item) => {
-  //   if(categoriesArr.includes(item.category) ){
-  //     return;
-  //   } else {
-  //     categoriesArr.push(item.category)
-  //   }
-  // });
   const categories = new Set();
 datas.forEach((item) => categories.add(item.category));
 const categoriesArr = [...categories];
-  // console.log(filteredData);
+
+
   return (
     <ScrollView className="flex gap-y-2 bg-white" showsVerticalScrollIndicator={false}>
      {categoriesArr.length > 0 ? categoriesArr.map((item)=>(
       <View key={item} className="  rounded-xl ">
         <ContentLayoutCustomized
           data={datas}
-          title={t("homepage.firstpage.sites.sites_cards.religious")}
+          title={t(`homepage.firstpage.sites.sites_cards.${item}`)}
           category={item}
           linkButton={t("homepage.firstpage.sites.sites_buttons.btn")}
         />

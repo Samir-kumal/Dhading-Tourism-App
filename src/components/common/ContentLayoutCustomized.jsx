@@ -14,15 +14,8 @@ const ContentLayoutCustomized = ({ title, data, category, linkButton }) => {
     setSelectedLangauge(i18n.language);
   }, [i18n.language]);
 
-  const thisData = data.filter((item) => item.category === category);
+  const thisData = data  &&  data.filter((item) => item.category === category);
 
-  // const renderedData = useMemo(() => {
-  //   if (category.toLowerCase() === "official" || category === "आधिकारिक") {
-  //     return thisData.slice(0, 2);
-  //   } else {
-  //     return thisData.slice(0, 4);
-  //   }
-  // }, [data]);
 
   const handlePress = () => {
     if (title === "Popular Destination") {
