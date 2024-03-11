@@ -28,21 +28,7 @@ const SightsContainer = () => {
   const { datas } = useDataProvider();
   const scrollViewRef = useRef();
   const { t } = useTranslation();
-  const [activeIndex, setActiveIndex] = useState(() => {
-    if (categoryType) {
-      if (categoryType === "Religious" || categoryType === "धार्मिक") {
-        return 0;
-      } else if (categoryType === "Municipality"|| categoryType === "नगरपालिका") {
-        return 1;
-      } else if (categoryType === "Natural" || categoryType === "प्राकृतिक") {
-        return 3;
-      } else {
-        return 4;
-      }
-    } else {
-      return 0;
-    }
-  });
+  const [activeIndex, setActiveIndex] = useState(0);
   const [pressed, setPressed] = useState(false);
   const { categoryType } = useLocalSearchParams();
   const [isLoading, setIsLoading] = useState(true);

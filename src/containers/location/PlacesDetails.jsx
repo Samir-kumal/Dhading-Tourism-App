@@ -53,13 +53,17 @@ const PlacesDetails = () => {
   const fixedRating = parseFloat(totalRating).toFixed(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [filteredItem, setFilteredItem] = useState(null);
+  const [imageArray, setImageArray] = useState([]);
+  const [image, setImage] = useState();
+
   useEffect(() => {
     if (datas) {
       const foundItem = datas.find((item) => item._id === placeId);
       setFilteredItem(foundItem);
+      setImageArray(foundItem.images)
+      setImage(foundItem.images[0]);
     }
   }, [datas, placeId]); 
-  // const [imageArray, setImageArray] = useState(filteredItem.images);
  
   const handleClick = () => {
     setModalVisible(true);
@@ -124,7 +128,7 @@ const PlacesDetails = () => {
               resizeMode="cover"
               className=" h-[40vh]  "
               source={{
-                uri: filteredItem.images[0]
+                uri: image
               }}
               style={{
                 transform: [
@@ -165,7 +169,7 @@ const PlacesDetails = () => {
               >
                 <AntDesign name="arrowsalt" size={24} color="white" />
               </Pressable>
-              {/* <View className="m-2 mt-4">
+              <View className="m-2 mt-4">
               <FlatList
                 data={imageArray}
                 scrollEnabled={true}
@@ -175,9 +179,7 @@ const PlacesDetails = () => {
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     onPress={() => {
-                      setImage({
-                        url: item,
-                      });
+                      setImage(item);
                     }}
                     className={
 
@@ -188,13 +190,13 @@ const PlacesDetails = () => {
                       className="rounded-lg"
                       style={{ width: "100%", height: "100%" }}
                       source={{
-                        uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${item}`,
+                        uri: item,
                       }}
                     />
                   </TouchableOpacity>
                 )}
               />
-            </View> */}
+            </View>
               {/* Bottom Section */}
               <View className="flex flex-row items-center justify-between mx-4 mt-6">
                 <View className="w-60">
@@ -275,17 +277,16 @@ const PlacesDetails = () => {
                   >
                     <Entypo name="cross" size={32} color="black" />
                   </TouchableOpacity>
-                  {/* <Image
+                  <Image
                   source={{
-                    uri: `http://prayatan.jwalamukhimun.gov.np/v1/places/image/${image.url}`,
-                    // uri: `http://103.140.1.252/v1/places/image/${image.url}`,
+                    uri: image,
                   }}
                   style={{
                     width: "100%",
                     height: "100%",
                     objectFit: "contain",
                   }}
-                /> */}
+                />
                 </View>
               </Modal>
             </Animated.View>
@@ -339,8 +340,7 @@ const PlacesDetails = () => {
           )}
         </>
       ) : (
-        <>
-          <View
+        <View
             className="h-[100%]  flex flex-row items-center justify-center w-full  "
             style={{ height: height }}
           >
@@ -350,7 +350,6 @@ const PlacesDetails = () => {
             <ActivityIndicator size={"large"} color={Colors.primary} />
             <Text>Loading...</Text>
           </View>
-        </>
       )}
     </>
   );
