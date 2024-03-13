@@ -8,6 +8,7 @@ import {
   Modal,
   StyleSheet,
   useColorScheme,
+  Alert,
 } from "react-native";
 import Button from "../../components/common/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/Auth";
 import CircleWrapper from "../../components/common/CircleWrapper";
 import Logo from "../../components/common/Logo";
-import { url } from "../../context/DataProvider";
+import { url, useDataProvider } from "../../context/DataProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -48,49 +49,41 @@ const Signin = () => {
     onSubmit(); // Call the onSubmit method here
   };
 
+
+
+
   const handleLogout = async () => {
     try {
       const response = await axios.post(`${url}/auth/logout`);
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-
   const onSubmit = async () => {
+    try {
+      console.log("clicked")
     setIsLoading(true);
     const response = await axios.post(`${url}/auth/signin`, {
-      username: values.email,
+      username: values.username,
       password: values.password,
     });
     console.log(response);
     await AsyncStorage.setItem("@token", response.data.data.accessToken )
     signIn(response.data.data.user);
+   
+   
+    } catch (error) {
+      console.log("error during signin", error)
     setIsLoading(false);
-    // axios
-    //   .post(`${url}/auth/signin`, {
-    //     username: values.email,
-    //     password: values.password,
-    //   })
-    //   .then(async (response) => {
-    //     console.log("response from Login", response);
-    //     setError(false);
-    //     console.log("hello");
 
-    //     const userObj = await getUser(response.data.accessToken);
-    //     signIn(userObj);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //     setError(error.response.data.message);
-    //   });
+    }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        email: "",
+        username: "",
         password: "",
       },
       validationSchema: signinSchema,
@@ -122,22 +115,22 @@ const Signin = () => {
           <View className="w-full justify-center relative items-center">
             <Svg.SvgXml
               className="absolute top-[26px] left-10 z-10"
-              xml={icons.email}
+              xml={icons.user}
             />
             <TextInput
               className={
-                errors.email && touched.email
+                errors.username && touched.username
                   ? " px-4 pl-12 my-2  transition ease-in-out animate-shake w-[85%] m-2 rounded-lg py-4 border-[1.5px] border-red  bg-[#FFE6E0]"
                   : "  px-4 pl-12 my-2  w-[85%] m-2 rounded-lg py-4 focus:border-[1.5px] focus:border-primary  bg-[#ffffff]"
               }
-              placeholder={t("signinPage.placeholder.email")}
-              value={values.email}
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
+              placeholder={t("signinPage.placeholder.username")}
+              value={values.username}
+              onChangeText={handleChange("username")}
+              onBlur={handleBlur("username")}
             />
-            {errors.email && touched.email && (
+            {errors.username && touched.username && (
               <View className="h-fit w-full px-8 flex items-start ">
-                <Text className=" text-[#ff0000]">{errors.email}</Text>
+                <Text className=" text-[#ff0000]">{errors.username}</Text>
               </View>
             )}
           </View>
@@ -173,14 +166,13 @@ const Signin = () => {
           </View>
 
           <Button
-            handleSubmit={handleSubmit}
+            handleSubmit={handleKeyboardSubmit}
             isLoading={isLoading}
             ClassName="bg-primary mt-2 "
             textClassName="text-white"
           >
             {t("signinPage.button")}
           </Button>
-          <Button handleSubmit={handleLogout}>Logout</Button>
           <Modal visible={isLoading} transparent animationType="fade">
             <View style={styles.modalBackground}>
               <View className="flex flex-row gap-x-6 px-14 py-8 bg-white items-center  justify-center rounded-md">

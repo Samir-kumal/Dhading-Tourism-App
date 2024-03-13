@@ -4,6 +4,7 @@ export default {
     msg: "Signing in...",
     placeholder: {
       email: "Email",
+      username: "Username",
       pass: "Password",
     },
     button: "Signin",
@@ -17,6 +18,7 @@ export default {
     placeholder: {
       name: "Full Name",
       email: "Email",
+      username: "Username",
       pass: "Password",
       confirm_pass: "Confirm Password ",
     },

@@ -17,13 +17,12 @@ import { useRouter } from "expo-router";
 import { signupSchema } from "../../../schema/index";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { url } from "../../context/DataProvider";
 const Signup = () => {
   console.log("check point -3: signup screen");
   const [isLoading, setIsLoading] = React.useState(false);
   const [err, setError] = React.useState("");
-  const {t}  = useTranslation();
-
-
+  const { t } = useTranslation();
 
   const router = useRouter();
 
@@ -36,10 +35,14 @@ const Signup = () => {
     setIsLoading(true);
 
     axios
-      .post(
-        "http://103.140.1.252/v1/auth/signup?apiKey=3fba649578447eb76c59",
-        values
-      )
+      .post(`${url}/users/signup`, {
+        username: values.username,
+        fullname: values.name,
+        email: values.email,
+        password: values.password,
+        confirmpassword: values.confirmPassword,
+        role: "user",
+      })
       .then((response) => {
         setError("");
         let client = response.data;
@@ -47,12 +50,16 @@ const Signup = () => {
           setTimeout(() => {
             setIsLoading(false);
             // router.replace("/signin")
-            Alert.alert(t("signupPage.alertbox.title"), t("signupPage.alertbox.msg"), [
-              {
-                text: "OK",
-                onPress: () => router.replace("/signin"),
-              },
-            ]);
+            Alert.alert(
+              t("signupPage.alertbox.title"),
+              t("signupPage.alertbox.msg"),
+              [
+                {
+                  text: "OK",
+                  onPress: () => router.replace("/signin"),
+                },
+              ]
+            );
           }, 2000);
         }
       })
@@ -65,15 +72,15 @@ const Signup = () => {
     useFormik({
       initialValues: {
         name: "",
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
+        role: "user",
       },
       validationSchema: signupSchema,
       onSubmit,
     });
-
-
 
   return (
     <View className="bg-[#E9EEF2] h-full">
@@ -82,7 +89,10 @@ const Signup = () => {
         className=" flex justify-center  w-full h-fit  z-40 items-center"
       >
         <View className="h-40 w-full flex justify-center items-center ">
-          <Text className="text-black translate-y-2 font-bold text-3xl">  {t("signupPage.title")}</Text>
+          <Text className="text-black translate-y-2 font-bold text-3xl">
+            {" "}
+            {t("signupPage.title")}
+          </Text>
         </View>
 
         <View className="w-full justify-center relative items-center">
@@ -105,6 +115,29 @@ const Signup = () => {
           {errors.name && touched.name && (
             <View className="h-fit w-full px-8 flex items-start ">
               <Text className=" text-[#ff0000]">{errors.name}</Text>
+            </View>
+          )}
+        </View>
+        <View className="w-full justify-center relative items-center">
+          <Svg.SvgXml
+            className="absolute top-[26px] left-10 z-10"
+            xml={icons.user}
+          />
+
+          <TextInput
+            className={
+              errors.username && touched.username
+                ? " px-4 pl-12 my-2 border-[1.5px] transition ease-in-out animate-shake w-[85%] m-2 rounded-lg py-4  border-red  bg-[#FFE6E0]"
+                : "  px-4 pl-12 my-2  w-[85%] m-2 rounded-lg py-4 focus:border-[1.5px] focus:border-primary  bg-[#ffffff]"
+            }
+            placeholder={t("signupPage.placeholder.username")}
+            value={values.username}
+            onChangeText={handleChange("username")}
+            onBlur={handleBlur("username")}
+          />
+          {errors.username && touched.username && (
+            <View className="h-fit w-full px-8 flex items-start ">
+              <Text className=" text-[#ff0000]">{errors.username}</Text>
             </View>
           )}
         </View>
@@ -206,20 +239,18 @@ const Signup = () => {
           textClassName="text-white"
           isLoading={isLoading}
         >
-        {t("signupPage.button")}
+          {t("signupPage.button")}
         </Button>
       </KeyboardAvoidingView>
 
       <View className="flex items-center  mx-4 my-6 ">
-        <Text>
-        {t("signupPage.already_have_account")}
-        </Text>
+        <Text>{t("signupPage.already_have_account")}</Text>
         <Text
-            className="font-bold  text-primary"
-            onPress={() => router.push("/signin")}
-          >
-            {t("signupPage.button2")}
-          </Text>
+          className="font-bold  text-primary"
+          onPress={() => router.push("/signin")}
+        >
+          {t("signupPage.button2")}
+        </Text>
       </View>
     </View>
   );

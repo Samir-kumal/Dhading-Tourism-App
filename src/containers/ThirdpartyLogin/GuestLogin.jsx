@@ -14,10 +14,13 @@ import { images } from "../../constants";
 import { useAuth } from "../../context/Auth";
 import { StatusBar } from "expo-status-bar";
 import Colors from "../../constants/themes";
+import { useDataProvider } from "../../context/DataProvider";
 const GuestLogin = ({ status, text }) => {
   const { signIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const [showNoConnectionModal, setShowNoConnectionModal] = useState(false);
+  const {  fetchData,FetchVideoData} = useDataProvider();
+
 
   return (
     <View className="flex-col  items-center">
@@ -29,6 +32,8 @@ const GuestLogin = ({ status, text }) => {
             setTimeout(() => {
               setLoading(!loading);
             }, 2000);
+            fetchData();
+            FetchVideoData();
           } else {
             setShowNoConnectionModal(true);
           }

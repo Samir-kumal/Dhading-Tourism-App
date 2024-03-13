@@ -1,9 +1,10 @@
-import React, { createContext, useState, useEffect, useMemo } from "react";
+import React, { createContext, useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
 import Constants from "expo-constants";
 import i18n from "../translation";
 import { set } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "./Auth";
 export const DataContext = createContext();
 export function useDataProvider() {
   return React.useContext(DataContext);
@@ -18,6 +19,7 @@ export const DataProvider = (props) => {
   const [datas, setDatas] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const {user} = useAuth();
 
   const [page, setPage] = useState(1);
   const [limit] = useState(200);
@@ -41,7 +43,7 @@ export const DataProvider = (props) => {
     fetchData();
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       if (
@@ -103,20 +105,22 @@ export const DataProvider = (props) => {
     } finally {
       setLoading(false);
     }
-  };
+  },[user]);
 
-  const FetchVideoData = async () => {
+  const FetchVideoData = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/videos`);
       setVideoData(response.data.data);
     } catch (err) {
       console.log(err);
     }
-  };
+  },[]);
   useEffect(() => {
+   if(user !==null){
     fetchData();
     FetchVideoData();
-  }, []);
+   }
+  }, [user]);
 
   const handleLanguageChange = () => {
     fetchData();
@@ -130,6 +134,8 @@ export const DataProvider = (props) => {
       handleLanguageChange,
       fetchNextPage,
       videoData,
+      fetchData,
+    FetchVideoData
     }),
     [datas, error, loading, videoData, handleLanguageChange]
   );

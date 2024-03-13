@@ -31,7 +31,6 @@ const Home = React.memo(() => {
   const [filteredData, setFilteredData] = useState(datas);
   const [inputData, setInputData] = useState("");
   const pathname = usePathname();
-  console.log("data",datas)
 
   const handleFilter = (text) => {
     const filteredItems = datas.filter((item) =>

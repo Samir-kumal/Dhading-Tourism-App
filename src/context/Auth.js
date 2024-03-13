@@ -5,7 +5,9 @@ import React, { useEffect, useMemo } from "react";
 import { useInternet } from "./Internet";
 import { signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-
+export const url = "https://dev.castelltech.com/api/v1/";
+import axios from "axios";
+import { Alert } from "react-native";
 const AuthContext = React.createContext();
 
 // This hook can be used to access the user info.
@@ -29,7 +31,6 @@ function useProtectedRoute(user) {
 }
 
 export function Provider(props) {
-
   const router = useRouter();
   const [user, setAuth] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -56,14 +57,26 @@ export function Provider(props) {
       await SecureStore.setItemAsync("user_status", "existing");
       setAuth(userObj);
     } catch (error) {
+      setLoading(false);
       console.error("Error signing in:", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(`${url}/auth/logout`);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   //log out the user from session
   const signOut = async () => {
     setLoading(true);
-    
+    if (Object.keys(user).includes("role") && Object.keys(user).length > 0) {
+      handleLogout();
+    }
     await firebaseSignOut(auth);
     await AsyncStorage.removeItem("@user");
     await AsyncStorage.removeItem("@user_token");
@@ -77,6 +90,7 @@ export function Provider(props) {
     () => ({
       signIn,
       // loading,
+      user,
       signOut,
       user,
     }),

@@ -25,11 +25,7 @@ export default function VideoController({ videoId }) {
         videoId={videoId}
         onChangeState={onStateChange}
       />: <View><Text>Loading....</Text></View>}
-      {/* <WebView
-      
-        style={{ width: "100%", height: 200 }}
-        source={{ uri: `https://youtube.com/embed/${videoId}` }}
-      /> */}
+
    
     </View>
   );

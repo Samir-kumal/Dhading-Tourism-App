@@ -12,10 +12,8 @@ import {
 import { FontAwesome } from '@expo/vector-icons'; 
 import Colors from "../../constants/themes";
 import { icons, images } from "../../constants";
-import * as Svg from "react-native-svg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useRouter } from "expo-router";
-import MainContainer from "../../components/common/MainContainer";
 
 import { useAuth } from "../../context/Auth";
 import { useTranslation } from "react-i18next";
@@ -261,67 +259,6 @@ const Profile = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    height: 270,
-    width: "auto",
-    padding: 20,
-    borderRadius: 10,
-  },
-  additionalContainer: {
-    // marginTop: 10,
-    padding: 20,
-    height: 420,
-  },
-  text: {
-    color: "black",
-    fontSize: 21,
 
-    textAlign: "center",
-    // fontFamily: "monospace",
-  },
-  smallText: {
-    fontSize: 16,
-  },
-  smallerText: {
-    fontSize: 14,
-  },
-  button: {
-    backgroundColor: "white",
-    padding: 15,
-    margin: 10,
-    color: "black",
-    borderWidth: 1,
-    borderColor: "#9370DB",
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  buttonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-  },
-  myDetails: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  buttonIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
-  },
-  buttonText: {
-    color: "black",
-    fontSize: 18,
-
-    textAlign: "center",
-  },
-  arrow: {
-    marginLeft: 30,
-  },
-});
 
 export default Profile;
