@@ -4,9 +4,7 @@ import SightsContainer from "../containers/SightsContainer/SightsContainer";
 
 const Sights = () => {
   return (
-    <>
       <SightsContainer />
-    </>
   );
 };
 

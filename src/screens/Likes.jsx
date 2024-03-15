@@ -4,7 +4,6 @@ import MainContainer from "../components/common/MainContainer";
 import Saved from "../containers/saved/Saved";
 import { StatusBar } from "expo-status-bar";
 import Menu from "./nav/Menu";
-import Header from "./nav/Header";
 import Sheet from "./nav/Sheet";
 import { useInternet } from "../context/Internet";
 import { useState } from "react";

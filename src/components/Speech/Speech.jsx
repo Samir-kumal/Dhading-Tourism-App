@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, Platform } from "react-native";
-import { FontAwesome5,AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
 import { usePathname } from "expo-router";
 

@@ -10,11 +10,8 @@ import React, { useContext } from "react";
 import { LikeStateContext } from "../../context/likeStateProvider";
 import * as Svg from "react-native-svg";
 import { icons } from "../../constants";
-import StarRating from "./StarRating";
-
 import { useRouter } from "expo-router";
 import limitWords from "../../helpers/WordSlice";
-import ExpoFastImage from "expo-fast-image";
 
 const Card = (props) => {
   const { LikedItem, toggleLike } = useContext(LikeStateContext);

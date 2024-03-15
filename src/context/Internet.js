@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
-import * as Network from "expo-network";
 import NetInfo from '@react-native-community/netinfo';
 export const InternetContext = createContext();
 

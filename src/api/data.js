@@ -1,4 +1,3 @@
-import { images } from "../constants";
 export const GOOGLE_MAPS_APIKEY = "AIzaSyBzjC8AM2qht0PARy330Gw6XQtUXScAOaY";
 export const imageData = [
   {

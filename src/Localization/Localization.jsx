@@ -8,13 +8,11 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
-import * as Svg from "react-native-svg";
-import { icons } from "../constants";
+
 import "../translation";
 import i18n from "../translation";
 import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../constants/themes";
-import { useTranslation } from "react-i18next";
 import { useDataProvider } from "../context/DataProvider";
 const Localization = ({ langModal, setLangModal, setTitle }) => {
   const { handleLanguageChange } = useDataProvider();

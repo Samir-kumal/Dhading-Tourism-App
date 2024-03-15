@@ -15,8 +15,7 @@ const PlaceCard = ({item}) => {
           title: item.title,
           placeId: item._id,
           description: item.description,
-          images: JSON.stringify(item.images),
-          coordinates: item.coordinates.coordinates,
+          coordinates: item.points.coordinates,
           totalRating: item.totalRating,
           location: item.location,
           wardno: item.wardno,
@@ -51,12 +50,12 @@ const PlaceCard = ({item}) => {
           borderRadius: 10,
         }}
       />
-      <View className=" px-2 w-1/2 flex items-center justify-around">
-        <View className = "w-full items-center justify-center">
+      <View className=" px-2 w-1/2 flex items-start justify-start gap-y-3">
+        <View className = "w-full items-start justify-center">
         <Text className="font-semibold text-lg  px-2 text-left"> {limitWords(item.title,3)}</Text>
 
         </View>
-        <Text className=" text-xs text-center opacity-50 px-1"> {limitWords(item.description,25)}</Text>
+        <Text className=" text-xs  opacity-50 pl-2 "> {limitWords(item.description,25)}</Text>
       </View>
     </Pressable>
     </View>

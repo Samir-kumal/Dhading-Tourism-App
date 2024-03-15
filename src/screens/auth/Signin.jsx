@@ -52,14 +52,7 @@ const Signin = () => {
 
 
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post(`${url}/auth/logout`);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const onSubmit = async () => {
     try {
       console.log("clicked")
@@ -98,9 +91,7 @@ const Signin = () => {
         </View>
 
         <View className="h-40 w-full relative justify-center items-center ">
-          {/* <View className="langButton absolute top-5 right-7">
-            <LocalizationBtn />
-          </View> */}
+        
 
           <Text className="text-black text-4xl font-bold mt-8 pt-6 space-x-1">
             {t("signinPage.title")}

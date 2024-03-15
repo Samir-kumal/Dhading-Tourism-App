@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, FlatList, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import Colors from "../../constants/themes";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";

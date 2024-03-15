@@ -4,9 +4,7 @@ import ThingsToDoContainer from '../containers/thingstodo/ThingsToDoContainer'
 
 const ThingsToDoDetail = () => {
   return (
-    <>
      <ThingsToDoContainer/>
-    </>
   )
 }
 

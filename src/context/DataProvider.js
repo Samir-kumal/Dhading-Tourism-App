@@ -1,17 +1,13 @@
 import React, { createContext, useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
-import Constants from "expo-constants";
 import i18n from "../translation";
-import { set } from "react-native-reanimated";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "./Auth";
 export const DataContext = createContext();
 export function useDataProvider() {
   return React.useContext(DataContext);
 }
 export const url = "https://dev.castelltech.com/api/v1/";
-// const url2 = `http://103.140.1.252/v1/places/en?page=${page}&limit=${limit}`;
-// const url2 = "http://prayatan.jwalamukhimun.gov.np/v1/places/ne";
+;
 const url2 = "https://dev.castelltech.com/api/v1/";
 // Function to get the user's preferred language from AsyncStorage
 
@@ -22,12 +18,8 @@ export const DataProvider = (props) => {
   const {user} = useAuth();
 
   const [page, setPage] = useState(1);
-  const [limit] = useState(200);
   const [totalPages, setTotalPages] = useState(1);
-  const [lang, setLang] = useState("eng");
-  // const url = "http://prayatan.jwalamukhimun.gov.np/v1/places/en";
 
-  const token = "3fba649578447eb76c59";
   const [videoData, setVideoData] = useState([]);
 
   const fetchNextPage = () => {
@@ -114,7 +106,7 @@ export const DataProvider = (props) => {
     } catch (err) {
       console.log(err);
     }
-  },[]);
+  },[user]);
   useEffect(() => {
    if(user !==null){
     fetchData();

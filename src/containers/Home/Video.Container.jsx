@@ -31,14 +31,14 @@ const VideoContainer = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      {isLoading ? (
+      {isLoading && videoData.length ===0 ? (
         <View>
           <ActivityIndicator size={"large"} />
         </View>
       ) : (
         videoData &&
         videoData.map((video) => (
-          <VideoController key={video._id} videoId={video.link} />
+          <VideoController key={video._id} videoId={extractVideoId(video.link)} />
         ))
       )}
     </View>

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { BackHandler, ToastAndroid } from "react-native";
-import { useNavigation } from "expo-router";
 
 const handleBackPress = (lastBackPressTimeRef) => {
   const currentTime = new Date().getTime();

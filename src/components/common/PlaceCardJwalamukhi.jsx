@@ -1,6 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
-import ExpoFastImage from "expo-fast-image";
 
 const PlaceCardJwalamukhi = (props) => {
   const { title, description } = props;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
-import { BackHandler, Image, View, StyleSheet } from "react-native";
+import { BackHandler,View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import Loading from "../status/Loading";
 import { PlaceCardJwalamukhi, PlaceCard } from "../common";

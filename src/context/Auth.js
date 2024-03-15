@@ -7,7 +7,6 @@ import { signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 export const url = "https://dev.castelltech.com/api/v1/";
 import axios from "axios";
-import { Alert } from "react-native";
 const AuthContext = React.createContext();
 
 // This hook can be used to access the user info.
