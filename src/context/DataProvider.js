@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import axios from "axios";
 import i18n from "../translation";
 import { useAuth } from "./Auth";
@@ -7,15 +13,16 @@ export function useDataProvider() {
   return React.useContext(DataContext);
 }
 export const url = "https://dev.castelltech.com/api/v1/";
-;
 const url2 = "https://dev.castelltech.com/api/v1/";
 // Function to get the user's preferred language from AsyncStorage
 
+const abortController = new AbortController();
+const signal = abortController.signal;
 export const DataProvider = (props) => {
   const [datas, setDatas] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -97,21 +104,30 @@ export const DataProvider = (props) => {
     } finally {
       setLoading(false);
     }
-  },[user]);
+  }, [user]);
 
   const FetchVideoData = useCallback(async () => {
     try {
-      const response = await axios.get(`${url}/videos`);
-      setVideoData(response.data.data);
+      const response = await axios.get(`${url}/videos`, { signal });
+      if (response) {
+        setVideoData(response.data.data);
+      }
     } catch (err) {
       console.log(err);
     }
-  },[user]);
+  }, [user]);
+
   useEffect(() => {
-   if(user !==null){
-    fetchData();
-    FetchVideoData();
-   }
+    if (user !== null && datas.length === 0 && videoData.length === 0) {
+      fetchData();
+      FetchVideoData();
+    }
+
+    return () => {
+      if (videoData.length > 0) {
+        abortController.abort();
+      }
+    };
   }, [user]);
 
   const handleLanguageChange = () => {
@@ -127,7 +143,7 @@ export const DataProvider = (props) => {
       fetchNextPage,
       videoData,
       fetchData,
-    FetchVideoData
+      FetchVideoData,
     }),
     [datas, error, loading, videoData, handleLanguageChange]
   );

@@ -21,20 +21,20 @@ import SettingContainer from "../../containers/settingsContainer/SettingsContain
 const UserProfile = ({ setName, setEmail, setPhone }) => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const {t} = useTranslation();
   console.log(Object.keys(user).length === 0, " form profile");
-  console.log(user)
 
   if(user){
 console.log(user)
 
   }
   useEffect(() => {
-    setTimeout(() => {
+   const interval = setTimeout(() => {
       setLoading(false);
     }, 1000);
     setName( user?.fullname || user?.displayName || user?.name);
     setEmail(user?.email || user?.email);
+
+    return ()=> clearTimeout(interval);
   }, [user]);
 
   const fadeAnim = React.useRef(new Animated.Value(0)).current;

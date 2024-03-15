@@ -35,28 +35,32 @@ export function Provider(props) {
   const [loading, setLoading] = React.useState(false);
   //get user from localstorage if the user have already logged in
   useEffect(() => {
-    setLoading(true);
+    let isMounted = true;
     const isUserLoggedIn = async () => {
       const userString = await AsyncStorage.getItem("@user");
-      const parsedUser = JSON.parse(userString);
-      setAuth(parsedUser);
-      setLoading(false);
+      if (userString) {
+        const parsedUser = JSON.parse(userString);
+        if (user ===null) {
+          setAuth(parsedUser);
+          setLoading(false);
+        }
+      }
     };
     isUserLoggedIn();
-    setLoading(false);
+
+    return () =>  isMounted = false;
+  
   }, []);
 
   useProtectedRoute(user);
 
   const signIn = async (userObj) => {
-    setLoading(true);
 
     try {
       await AsyncStorage.setItem("@user", JSON.stringify(userObj));
       await SecureStore.setItemAsync("user_status", "existing");
       setAuth(userObj);
     } catch (error) {
-      setLoading(false);
       console.error("Error signing in:", error);
     }
   };
@@ -72,7 +76,6 @@ export function Provider(props) {
 
   //log out the user from session
   const signOut = async () => {
-    setLoading(true);
     if (Object.keys(user).includes("role") && Object.keys(user).length > 0) {
       handleLogout();
     }
@@ -80,7 +83,6 @@ export function Provider(props) {
     await AsyncStorage.removeItem("@user");
     await AsyncStorage.removeItem("@user_token");
     setAuth(null);
-    setLoading(false);
 
     router.replace("/signin");
   };
