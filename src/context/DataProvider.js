@@ -89,7 +89,8 @@ export const DataProvider = (props) => {
       } else {
         const response = await axios.get(`${url}/places`, {
           headers: {
-            "api-key": "3fba649578447eb76c59",
+            "Content-Type": "application/json",
+            "x-api-key": "5bdb68c9efa67cf69f3425f908",
           },
         });
         if (response) {
@@ -108,9 +109,18 @@ export const DataProvider = (props) => {
 
   const FetchVideoData = useCallback(async () => {
     try {
-      const response = await axios.get(`${url}/videos`, { signal });
+      const response = await axios.get(`${url}/videos`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "5bdb68c9efa67cf69f3425f908",
+        },
+        signal
+      }
+      );
       if (response) {
         setVideoData(response.data.data);
+        console.log("Video data", response)
       }
     } catch (err) {
       console.log(err);
@@ -124,10 +134,10 @@ export const DataProvider = (props) => {
     }
 
     return () => {
-      if (videoData.length > 0) {
+      if(videoData.length > 0){
         abortController.abort();
       }
-    };
+    }
   }, [user]);
 
   const handleLanguageChange = () => {

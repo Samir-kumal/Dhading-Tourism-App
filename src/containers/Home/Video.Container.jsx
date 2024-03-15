@@ -10,6 +10,7 @@ const VideoContainer = () => {
   const { t } = useTranslation();
   const { videoData } = useDataProvider();
   const [isLoading, setIsLoading] = React.useState(true);
+  console.log(videoData);
   useEffect(() => {
     setIsLoading(false);
   }, [videoData]);

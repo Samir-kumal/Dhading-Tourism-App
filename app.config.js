@@ -1,7 +1,7 @@
 module.exports = {
   name: "Visit Jwalamukhi",
   slug: "visit-jwalamukhi",
-  version: "1.0.0",
+  version: "4.0.0",
   orientation: "portrait",
   scheme: "wine-dwine",
   icon: "./assets/Logos/AppLogo/applogo.png",
@@ -37,7 +37,7 @@ module.exports = {
       backgroundColor: "#ffffff",
     },
     package: "com.bms.jwalamukhimuni",
-    versionCode: 1,
+    versionCode: 4,
     config: {
       googleMaps: {
         apiKey: "AIzaSyAa0BjHuGpQ0YtaJuVJC23RcbTvw99jh80",
